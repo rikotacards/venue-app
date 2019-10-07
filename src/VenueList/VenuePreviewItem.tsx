@@ -65,11 +65,11 @@ export const VenuePreviewItem: React.FunctionComponent<
       <CardActions>
       
         <Button size="small" color="primary" href={'/what'}>
-          Share
+          share
         </Button>
 
         <Button size="small" color="primary">
-          Learn More
+          Details
         </Button>
         <Button size="small" color="primary">
           Contact Venue Through Us (15% Off)

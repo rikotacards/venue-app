@@ -8,7 +8,9 @@ import {
 import List from "@material-ui/core/List";
 import ListItemText from "@material-ui/core/ListItemText";
 import { eventTypes } from "../FakeData/eventTypes";
-import { MenuItem } from "@material-ui/core";
+import { MenuItem } from "@material-ui/core"
+import { withRouter, RouteComponentProps } from "react-router";
+
 interface SideMenuProps {
   openCloseStatus: boolean;
   nameSpace: string;
@@ -34,10 +36,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export const SideBar: React.FunctionComponent<SideMenuProps> = props => {
+const SideBar: React.FunctionComponent<SideMenuProps & RouteComponentProps>= React.memo((props) => {
   const classes = useStyles();
   const [selected, setSelection] = React.useState<number | null>(null)
-  const { nameSpace, openCloseStatus, clickAction } = props;
+  const { nameSpace, openCloseStatus, clickAction, history } = props;
+  
   
  
 // These are side menu items
@@ -45,11 +48,12 @@ export const SideBar: React.FunctionComponent<SideMenuProps> = props => {
     const handleClick = (index:number) => {
         setSelection(index);
         clickAction(eventType);
+        history.push(eventType)
        
     }
     return (
-      <MenuItem button onClick={() =>handleClick(index)} key={eventType} selected={selected === index}>
-        <ListItemText primary={eventType}/>
+      <MenuItem button onClick={() =>handleClick(index)} key={eventType} selected={selected === index} >
+        <ListItemText primary={eventType} key={eventType}/>
       </MenuItem>
     );
   });
@@ -65,4 +69,6 @@ export const SideBar: React.FunctionComponent<SideMenuProps> = props => {
       <List>{itemList}</List>
     </Drawer>
   );
-};
+});
+
+export const SideBarWithRouter = withRouter(SideBar)

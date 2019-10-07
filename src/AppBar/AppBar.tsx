@@ -5,7 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Button from "@material-ui/core/Button";
-import { SideBar } from "../SideBarNav/SideBar";
+import { SideBarWithRouter } from "../SideBarNav/SideBar";
 import { MainContentContainer } from "../MainContent/MainContentContainer";
 import clsx from "clsx";
 import { functionTypes } from "../FakeData/functionTypes";
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const DenseAppBar = () => {
 
-    const classes = useStyles();
+  const classes = useStyles();
   const buttonClasses = useButtonStyles();
   const [isOpen, setOpenClose] = React.useState(true);
   const [eventType, setEventType] = React.useState('Annual Dinner') // TODO
@@ -72,6 +72,7 @@ export const DenseAppBar = () => {
     return (
       <Button
         classes={buttonClasses}
+        key={functions}
         onClick={() => handleFunctionClick(functions)}
       >
         {functions}
@@ -97,7 +98,7 @@ export const DenseAppBar = () => {
         </Toolbar>
       </AppBar>
 
-        <SideBar openCloseStatus={isOpen} nameSpace={functionSelected} clickAction={setEventType}/>
+        <SideBarWithRouter openCloseStatus={isOpen} nameSpace={functionSelected} clickAction={setEventType}/>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: isOpen

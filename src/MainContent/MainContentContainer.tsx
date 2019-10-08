@@ -19,14 +19,13 @@ export const MainContentContainer: React.FunctionComponent<
   if (!venueListData) {
     return <Typography>No venues in this category</Typography>;
   }
+  // TODO make venueId dynamic
   return (
     <Switch>
-     
       <Route path="/what">
-    <VenuePageContainer venueId={'hotel_1'}/>
-          </Route>
-
-          <Route path="/">
+        <VenuePageContainer venueId={'hotel_1'}/>
+      </Route>
+      <Route path="/">
         <VenueList venueListData={venueListData} />
       </Route>
     </Switch>

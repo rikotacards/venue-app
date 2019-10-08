@@ -9,6 +9,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { VenueStatsContainer } from "./VenueItemStats";
+// import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
@@ -41,6 +42,7 @@ export const VenuePreviewItem: React.FunctionComponent<
 
   const classes = useStyles();
   return (
+    
     <Card className={classes.card}>
       <CardActionArea className={classes.cardActionArea}>
         <CardMedia
@@ -58,23 +60,26 @@ export const VenuePreviewItem: React.FunctionComponent<
           </Typography>
           <VenueStatsContainer venueName={props.venueName} />
         </CardContent>
-
+      
        
       </CardActionArea>
+      
 
       <CardActions>
-      
-        <Button size="small" color="primary" href={'/what'}>
+        <Button>
+       
           share
+        
         </Button>
 
-        <Button size="small" color="primary">
-          Details
+       <Button >
+         Details
         </Button>
         <Button size="small" color="primary">
           Contact Venue Through Us (15% Off)
         </Button>
       </CardActions>
     </Card>
+   
   );
 };

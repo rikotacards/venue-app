@@ -37,7 +37,7 @@ export const VenuePageContainer: React.FunctionComponent<
          <Card>MAIN STUFF</Card>
         </Grid>
         <Grid item xs={4} className={classes.venuHeader}>
-            <Paper className={classes.paper} color="primary">
+            <Paper className={classes.paper} >
               <ContactContainer phone={phone} email={email}/>
             </Paper>
             <Paper className={classes.paper}>

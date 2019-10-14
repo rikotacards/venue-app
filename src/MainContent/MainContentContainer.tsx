@@ -3,7 +3,7 @@ import { venueData } from "../FakeData/venueData";
 import { VenueList } from "../VenueList/VenueList";
 import { Typography } from "@material-ui/core";
 import { Route, Switch } from "react-router";
-import { VenuePageContainer } from '../VenuePage/VenuePageContainer'
+import { VenuePageContainer } from "../VenuePage/VenuePageContainer";
 
 interface MainContentContainerProps {
   eventType: string;
@@ -19,12 +19,12 @@ export const MainContentContainer: React.FunctionComponent<
   if (!venueListData) {
     return <Typography>No venues in this category</Typography>;
   }
-  // TODO make venueId dynamic
   return (
     <Switch>
       <Route path="/what">
-        <VenuePageContainer venueId={'hotel_1'}/>
+        <VenuePageContainer venueId={"hotel_1"} />
       </Route>
+
       <Route path="/">
         <VenueList venueListData={venueListData} />
       </Route>

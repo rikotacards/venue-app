@@ -17,10 +17,13 @@ const useClasses = makeStyles((theme: Theme) => ({
     height: "300px"
   },
   paper: {
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
+    border: `1px solid ${theme.palette.divider}`
   },
   mainContent: {
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
+    border: `1px solid ${theme.palette.divider}`
+
   },
   container: {
     padding: '0 15%'
@@ -48,18 +51,18 @@ export const VenuePageContainer: React.FunctionComponent<
         <Card>HEADER AREA HERE</Card>
       </Grid>
       <Grid item xs={8}>
-        <Card className={classes.mainContent}>
+        <Paper className={classes.mainContent} elevation={0}>
           <MainContent />
-        </Card>
+        </Paper>
       </Grid>
       <Grid item xs={4} className={classes.venuHeader}>
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={0}>
           <ContactContainer phone={phone} email={email} />
         </Paper>
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={0}>
           <BudgetDetailsContainer perHeadBudget={perHeadBudget} />
         </Paper>
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={0}>
           <OtherDetailsContainer
             address={address}
             capacityStanding={capacityStanding}

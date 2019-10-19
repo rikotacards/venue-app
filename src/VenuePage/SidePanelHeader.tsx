@@ -8,14 +8,14 @@ interface SidePanelHeaderProps {
 const useHeaderClasses = makeStyles((theme: Theme) => ({
     root: {
       height: "25px",
-      background: theme.palette.primary.main,
+      background: 'transparent',
       textAlign: 'left',
       alignItems: 'center',
       padding: theme.spacing(1),
       display: 'flex',
     },
     textColor: {
-        color: 'white'
+        color: 'black'
     }
   }));
   

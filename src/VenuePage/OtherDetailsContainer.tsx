@@ -12,6 +12,7 @@ interface OtherDetailsContainerProps {
 const useStyles = makeStyles((theme: Theme) => ({
    root: {
       padding: theme.spacing(1),
+      textAlign: 'left'
    }
 }))
 

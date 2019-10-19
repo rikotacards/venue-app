@@ -13,7 +13,8 @@ interface ContactContainerProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
      padding: theme.spacing(1),
-  }
+  }, 
+
 }))
 
 export const ContactContainer: React.FunctionComponent<
@@ -42,9 +43,11 @@ export const ContactContainer: React.FunctionComponent<
     <>
     <SidePanelHeader headerText={'Contact Venue'}/>
     <Grid container={true} classes={classes}>
-      <Grid item={true} xs={12}>
-        <Button onClick={() => toggleShowNumber(!showNumber)}>Call</Button>
-        <Button onClick= {() => toggleShowEmail(!showEmail)}>Email</Button>
+      <Grid item={true} xs={6}>
+        <Button onClick={() => toggleShowNumber(!showNumber)} variant='contained'>Call</Button>
+      </Grid>
+      <Grid item={true} xs={6}>
+        <Button onClick= {() => toggleShowEmail(!showEmail)} variant='contained'>Email</Button>
       </Grid>
       <Grid item xs={12}>
         {contactCard()}

@@ -12,8 +12,9 @@ const useGridList = makeStyles(theme => ({
     gridList: {
       flexWrap: "nowrap",
       // height: '400px',
+      width: '100%', 
+      height: '100%',
       // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-      transform: "translateZ(0)"
     }
   }));
   
@@ -25,14 +26,14 @@ const useGridList = makeStyles(theme => ({
   
     return (
       <div className={gridListClasses.root}>
-        <GridList className={gridListClasses.gridList}>
-          <GridListTile key={image} rows={1} cols={1}>
+        <GridList className={gridListClasses.gridList} cellHeight={200} spacing={1}>
+          <GridListTile key={image} rows={2} cols={1.9}>
             <img src={image} />
           </GridListTile>
-          <GridListTile key={image} rows={1} cols={1}>
+          <GridListTile key={image} rows={2} cols={2}>
             <img src={image} />
           </GridListTile>
-          <GridListTile key={image} rows={1} cols={1}>
+          <GridListTile key={image} rows={2} cols={2}>
             <img src={image} />
           </GridListTile>
         </GridList>

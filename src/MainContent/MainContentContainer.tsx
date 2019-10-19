@@ -3,7 +3,7 @@ import { venueData } from "../FakeData/venueData";
 import { VenueList } from "../VenueList/VenueList";
 import { Typography } from "@material-ui/core";
 import { Route, Switch } from "react-router";
-import { VenuePageContainer } from '../VenuePage/VenuePageContainer'
+import { VenuePageContainer } from "../VenuePage/VenuePageContainer";
 
 interface MainContentContainerProps {
   eventType: string;
@@ -21,12 +21,11 @@ export const MainContentContainer: React.FunctionComponent<
   }
   return (
     <Switch>
-     
       <Route path="/what">
-    <VenuePageContainer venueId={'hotel_1'}/>
-          </Route>
+        <VenuePageContainer venueId={"hotel_1"} />
+      </Route>
 
-          <Route path="/">
+      <Route path="/">
         <VenueList venueListData={venueListData} />
       </Route>
     </Switch>

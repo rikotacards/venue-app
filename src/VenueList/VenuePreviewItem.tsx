@@ -9,6 +9,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { VenueStatsContainer } from "./VenueItemStats";
+import { Link } from "react-router-dom";
+import { MenuItem } from "@material-ui/core";
 // import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -38,11 +40,10 @@ interface VenuePreviewItemProps {
 export const VenuePreviewItem: React.FunctionComponent<
   VenuePreviewItemProps
 > = props => {
-  // TODO Button on click action open new tab 
+  // TODO Button on click action open new tab
 
   const classes = useStyles();
   return (
-    
     <Card className={classes.card}>
       <CardActionArea className={classes.cardActionArea}>
         <CardMedia
@@ -60,26 +61,17 @@ export const VenuePreviewItem: React.FunctionComponent<
           </Typography>
           <VenueStatsContainer venueName={props.venueName} />
         </CardContent>
-      
-       
       </CardActionArea>
-      
 
       <CardActions>
-        <Button>
-       
-          share
-        
+        <Button component={Link} to="/what">
+          Details
         </Button>
 
-       <Button >
-         Details
-        </Button>
         <Button size="small" color="primary">
           Contact Venue Through Us (15% Off)
         </Button>
       </CardActions>
     </Card>
-   
   );
 };

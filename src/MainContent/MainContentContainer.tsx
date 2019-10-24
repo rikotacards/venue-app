@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { venueData } from "../FakeData/venueData";
 import { VenueList } from "../VenueList/VenueList";
 import { Typography } from "@material-ui/core";
 import { Route, Switch } from "react-router";
 import { VenuePageContainer } from "../VenuePage/VenuePageContainer";
+const axios = require('axios').default;
 
 interface MainContentContainerProps {
   eventType: string;
@@ -15,6 +16,13 @@ export const MainContentContainer: React.FunctionComponent<
   MainContentContainerProps
 > = props => {
   const venueListData = venueData[props.eventType];
+  const [eventData, grabData] = React.useState('0')
+
+  useEffect(() => {
+    console.log('hi')
+    axios.get('/api/hello')
+      .then((response: string)=> console.log(response))
+  })
 
   if (!venueListData) {
     return <Typography>No venues in this category</Typography>;

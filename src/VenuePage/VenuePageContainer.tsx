@@ -47,9 +47,7 @@ export const VenuePageContainer: React.FunctionComponent<
   } = venueDetailsData[venueId] && venueDetailsData[venueId];
   return (
     <Grid container spacing={1} className={classes.container}>
-      <Grid item xs={12}>
-        <Card>HEADER AREA HERE</Card>
-      </Grid>
+     
       <Grid item xs={8}>
         <Paper className={classes.mainContent} elevation={0}>
           <MainContent />

@@ -1,6 +1,16 @@
 import React from "react";
-import { Grid, Button, makeStyles, Theme } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  makeStyles,
+  Theme,
+  Typography,
+  Box
+} from "@material-ui/core";
 import { SidePanelHeader } from "./SidePanelHeader";
+import AspectRatioIcon from "@material-ui/icons/AspectRatio";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+import GroupIcon from "@material-ui/icons/Group";
 
 interface OtherDetailsContainerProps {
   venueSize: number | string;
@@ -10,11 +20,18 @@ interface OtherDetailsContainerProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-   root: {
-      padding: theme.spacing(1),
-      textAlign: 'left'
-   }
-}))
+  root: {
+    padding: theme.spacing(1),
+    textAlign: "left"
+  },
+  item: {
+    display: "flex",
+    flexDirection: "column"
+  },
+  icon: {
+    paddingRight: theme.spacing(1)
+  }
+}));
 
 export const OtherDetailsContainer: React.FunctionComponent<
   OtherDetailsContainerProps
@@ -24,18 +41,33 @@ export const OtherDetailsContainer: React.FunctionComponent<
   return (
     <>
       <SidePanelHeader headerText={"Details"} />
-      <Grid container={true} classes={classes}>
-        <Grid item={true} xs={12}>
-          <b>Venue Size</b> {venueSize}
+      <Grid container={true} classes={classes} spacing={5}>
+        <Grid item={true} xs={12} className={classes.item}>
+          <Box display="flex" flexDirection="row">
+            <AspectRatioIcon className={classes.icon} />
+            <Typography variant="overline">Venue Size</Typography>
+            <Typography>{venueSize}</Typography>
+          </Box>
         </Grid>
-        <Grid item={true} xs={12}>
-         <b>Address</b> {address}
+        <Grid item={true} xs={12} className={classes.item}>
+          <Box display="flex" flexDirection="row">
+            <LocationOnIcon className={classes.icon} />{" "}
+            <Typography variant="overline">Address</Typography>
+          </Box>
+
+          <Typography>{address}</Typography>
         </Grid>
-        <Grid item={true} xs={12}>
-          <b>Standing Capacity</b> {capacityStanding}
+        <Grid item={true} xs={12} className={classes.item}>
+        <Box display="flex" flexDirection="row">
+
+          <GroupIcon className={classes.icon} />
+          <Typography variant="overline">Capacity</Typography> 
+          </Box>
+          <Typography>{capacityStanding}</Typography>
         </Grid>
-        <Grid item={true} xs={12}>
-          <b>Sitting Capacity</b> {capacitySitting}
+        <Grid item={true} xs={12} className={classes.item}>
+          <Typography variant="overline">Sitting Capacity</Typography>{" "}
+          {capacitySitting}
         </Grid>
       </Grid>
     </>

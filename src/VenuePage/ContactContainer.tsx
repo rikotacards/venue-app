@@ -2,8 +2,9 @@ import React from "react";
 import { Grid, Button, Typography, Theme, makeStyles } from "@material-ui/core";
 import { SidePanelHeader } from "./SidePanelHeader";
 import { EmailForm } from "./EmailForm";
-import PhoneIcon from '@material-ui/icons/Phone';
-import EmailIcon from '@material-ui/icons/Email';
+import PhoneIcon from "@material-ui/icons/Phone";
+import EmailIcon from "@material-ui/icons/Email";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 interface ContactContainerProps {
   phone: number | string;
@@ -14,11 +15,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(1)
   },
-  button:{
-    width: '100%',
+  button: {
+    width: "100%",
     padding: theme.spacing(1),
-    display:'flex', 
-    justifyContent:'center'
+    display: "flex",
+    justifyContent: "center"
+  },
+  phoneNumber: {
+    paddingTop: theme.spacing(2)
   }
 }));
 
@@ -31,7 +35,12 @@ export const ContactContainer: React.FunctionComponent<
   const [showEmail, toggleShowEmail] = React.useState(false);
   const contactCard = () => {
     if (showNumber) {
-      return <Typography>{phone}</Typography>;
+      return (
+        <Typography className={classes.phoneNumber}>
+          {phone}
+          <LinearProgress />
+        </Typography>
+      );
     }
     if (showEmail) {
       return <EmailForm />;
@@ -49,9 +58,8 @@ export const ContactContainer: React.FunctionComponent<
             variant="contained"
             color="primary"
             className={classes.button}
-
           >
-           <PhoneIcon/> 
+            <PhoneIcon />
           </Button>
         </Grid>
         <Grid item={true} xs={6}>
@@ -61,7 +69,7 @@ export const ContactContainer: React.FunctionComponent<
             color="primary"
             className={classes.button}
           >
-            <EmailIcon/>
+            <EmailIcon />
           </Button>
         </Grid>
         <Grid item xs={12}>

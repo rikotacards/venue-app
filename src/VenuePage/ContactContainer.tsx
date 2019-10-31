@@ -2,6 +2,8 @@ import React from "react";
 import { Grid, Button, Typography, Theme, makeStyles } from "@material-ui/core";
 import { SidePanelHeader } from "./SidePanelHeader";
 import { EmailForm } from "./EmailForm";
+import PhoneIcon from '@material-ui/icons/Phone';
+import EmailIcon from '@material-ui/icons/Email';
 
 interface ContactContainerProps {
   phone: number | string;
@@ -15,6 +17,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   button:{
     width: '100%',
     padding: theme.spacing(1),
+    display:'flex', 
+    justifyContent:'center'
   }
 }));
 
@@ -47,7 +51,7 @@ export const ContactContainer: React.FunctionComponent<
             className={classes.button}
 
           >
-            Call
+           <PhoneIcon/> 
           </Button>
         </Grid>
         <Grid item={true} xs={6}>
@@ -57,7 +61,7 @@ export const ContactContainer: React.FunctionComponent<
             color="primary"
             className={classes.button}
           >
-            Email
+            <EmailIcon/>
           </Button>
         </Grid>
         <Grid item xs={12}>

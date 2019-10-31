@@ -12,7 +12,7 @@ export const VenueOverviewContent: React.FunctionComponent = () => {
     return (
       <Box>
         <Typography variant="h6" className={overviewClasses.root}>
-          Overview
+     
         </Typography>
         <Box className={overviewClasses.root}>
             <ul>
@@ -20,7 +20,6 @@ export const VenueOverviewContent: React.FunctionComponent = () => {
                 <li>Specially designed party room for small gatherings and parties</li>
                 <li>Contains 4 differently designed private party rooms for hire</li>
                 <li> Conveinant Causeway Bay location</li>
-  
             </ul>
       </Box>
       </Box>

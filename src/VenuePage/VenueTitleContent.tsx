@@ -12,7 +12,7 @@ export const VenueTitleContent: React.FunctionComponent = () => {
     const titleClasses = useTitleStyles();
     const venueName = "The Grand Hyatt"; // TODO
     return (
-      <Typography variant="h4" className={titleClasses.root}>
+      <Typography variant="h6" className={titleClasses.root}>
         {venueName}
       </Typography>
     );

@@ -22,7 +22,7 @@ const useClasses = makeStyles((theme: Theme) => ({
   },
   mainContent: {
     padding: theme.spacing(1),
-    border: `1px solid ${theme.palette.divider}`
+    border: 0
 
   },
   container: {

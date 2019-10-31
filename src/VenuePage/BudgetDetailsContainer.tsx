@@ -1,15 +1,20 @@
 import React from "react";
-import { Grid, Button, makeStyles, Theme } from "@material-ui/core";
+import { Grid, Button, makeStyles, Theme, Typography } from "@material-ui/core";
 import { SidePanelHeader } from "./SidePanelHeader";
-
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 interface BudgetDetailsContainerProps {
   perHeadBudget: number | string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    padding: theme.spacing(1)
-  }
+    padding: theme.spacing(1),
+    textAlign: 'left'
+  },
+    item: {
+      display: 'flex', 
+      flexDirection: 'row'
+    }
 }));
 
 export const BudgetDetailsContainer: React.FunctionComponent<
@@ -22,8 +27,8 @@ export const BudgetDetailsContainer: React.FunctionComponent<
     <>
       <SidePanelHeader headerText={"pricing"} />
       <Grid container={true} classes={classes}>
-        <Grid item={true} xs={12}>
-          {perHeadBudget}
+        <Grid item={true} xs={12} className={classes.item}>
+        <AttachMoneyIcon/> <Typography>{perHeadBudget}</Typography>
         </Grid>
       </Grid>
     </>

@@ -16,7 +16,6 @@ export const MainContent: React.FunctionComponent = () => {
         <Grid item xs={12}>
           <VenueGallery />
           <VenueTitleContent />
-          <Divider/>
           <VenueOverviewContent />
           <VenueIntro />
           <AmenitiesContainer/>

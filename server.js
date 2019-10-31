@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/api/hello', (req, res) => {
+app.get('/api/hello', async (req, res) => {
   console.log('server hit')
   const output = await pg.getAllItems()
   res.send({ express: 'Hello From Express' });

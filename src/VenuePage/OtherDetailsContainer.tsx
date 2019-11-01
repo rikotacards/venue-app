@@ -26,13 +26,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   item: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    justifyContent: 'flex-end'
   },
   icon: {
-    paddingRight: theme.spacing(1)
+    paddingRight: theme.spacing(1),
+    // color: theme.palette.primary.main
+  },
+  venueMetrics: {
+    paddingLeft: theme.spacing(4)
   }
 }));
-
+// TODO remove hardcoded values
 export const OtherDetailsContainer: React.FunctionComponent<
   OtherDetailsContainerProps
 > = props => {
@@ -41,32 +46,35 @@ export const OtherDetailsContainer: React.FunctionComponent<
   return (
     <>
       <SidePanelHeader headerText={"Details"} />
-      <Grid container={true} classes={classes} spacing={5}>
+      <Grid container={true} classes={classes} spacing={3}>
         <Grid item={true} xs={12} className={classes.item}>
           <Box display="flex" flexDirection="row">
             <AspectRatioIcon className={classes.icon} />
-            <Typography variant="overline">Venue Size</Typography>
-            <Typography>{venueSize}</Typography>
+            <Typography variant="subtitle2">Venue Size</Typography>
           </Box>
+          <Typography variant="caption" className={classes.venueMetrics}>
+            {" "}
+            2000 square ft{venueSize}
+          </Typography>
         </Grid>
         <Grid item={true} xs={12} className={classes.item}>
           <Box display="flex" flexDirection="row">
             <LocationOnIcon className={classes.icon} />{" "}
-            <Typography variant="overline">Address</Typography>
+            <Typography variant="subtitle2">Address</Typography>
           </Box>
-
-          <Typography>{address}</Typography>
+          <Typography variant="caption" className={classes.venueMetrics}>{address}</Typography>
         </Grid>
         <Grid item={true} xs={12} className={classes.item}>
-        <Box display="flex" flexDirection="row">
-
-          <GroupIcon className={classes.icon} />
-          <Typography variant="overline">Capacity</Typography> 
+          <Box display="flex" flexDirection="row">
+            <GroupIcon   className={classes.icon} />
+            <Typography variant="subtitle2">Capacity</Typography>
           </Box>
-          <Typography>{capacityStanding}</Typography>
+          <Typography variant="caption" className={classes.venueMetrics}>
+            {capacityStanding}
+          </Typography>
         </Grid>
         <Grid item={true} xs={12} className={classes.item}>
-          <Typography variant="overline">Sitting Capacity</Typography>{" "}
+          <Typography variant="subtitle2">Sitting Capacity</Typography>{" "}
           {capacitySitting}
         </Grid>
       </Grid>

@@ -30,13 +30,15 @@ const useClasses = makeStyles((theme: Theme) => ({
   },
   overlay: {
     background: (isOpen: boolean) =>
-      isMobile() ? (isOpen ? "black" : "transparent") : "transparent"
+      isMobile() ? (isOpen ? "grey" : "transparent") : "transparent"
   },
   wrapper: {
     display: "flex",
     flexDirection: "row",
     padding: isDesktop() ? "0px 10%" : 0,
-    flexWrap: isMobile() ? 'wrap': 'nowrap'
+    flexWrap: isMobile() ? 'wrap': 'nowrap',
+    opacity: (isOpen: boolean) =>
+    isMobile() ? (isOpen ? 0.3 : 1) :undefined
   },
   rightSideColumn: {
     display: "flex",

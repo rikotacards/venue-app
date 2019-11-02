@@ -15,25 +15,34 @@ interface VenuePageContainerProps {
 }
 
 const useClasses = makeStyles((theme: Theme) => ({
-  venuHeader: {
-    height: "300px"
-  },
   paper: {
     marginBottom: theme.spacing(1),
     border: `1px solid ${theme.palette.divider}`
   },
   mainContent: {
-    // padding: theme.spacing(1),
-    border: 0
+    display: "flex",
+    flexDirection: "column",
+    border: 0,
+    flexGrow: 1,
+    flexBasis: isMobile() ? "100%" : "70%",
+    marginRight: isMobile() ? 0 : theme.spacing(2),
+    maxWidth: "550px"
   },
-  container: {
-    padding: isDesktop() ? "0 15%" : 0,
-    opacity: (isOpen: boolean) =>isMobile() ? (isOpen ? 0.3 : 1) : 1
-
-  }, 
-  overlay:{
-    background: (isOpen: boolean) =>isMobile() ? (isOpen  ? 'black': 'transparent') : 'transparent',
-
+  overlay: {
+    background: (isOpen: boolean) =>
+      isMobile() ? (isOpen ? "black" : "transparent") : "transparent"
+  },
+  wrapper: {
+    display: "flex",
+    flexDirection: "row",
+    padding: isDesktop() ? "0px 10%" : 0,
+    flexWrap: isMobile() ? 'wrap': 'nowrap'
+  },
+  rightSideColumn: {
+    display: "flex",
+    flexDirection: "column",
+    flexBasis: isMobile() ? "100%": "30%",
+    flexShrink: 1
   }
 }));
 
@@ -54,7 +63,7 @@ export const VenuePageContainer: React.FunctionComponent<
   } = venueDetailsData[venueId] && venueDetailsData[venueId];
 
   const rightSideColumn = (
-    <>
+    <Box className={classes.rightSideColumn}>
       <Paper className={classes.paper} elevation={0}>
         <ContactContainer phone={phone} email={email} />
       </Paper>
@@ -69,23 +78,17 @@ export const VenuePageContainer: React.FunctionComponent<
           venueSize={venueSize}
         />
       </Paper>
-    </>
+    </Box>
   );
 
   return (
     <Box className={classes.overlay}>
-
-    <Grid container spacing={1} className={classes.container}>
-      <Grid item xs={isMobile() ? 12 : 8}>
+      <Box className={classes.wrapper}>
         <Paper className={classes.mainContent} elevation={0}>
           <MainContent />
         </Paper>
-      </Grid>
-      {isDesktop()? (<Grid item xs={4} className={classes.venuHeader}>
         {rightSideColumn}
-      </Grid>) : null}
-    </Grid>
+      </Box>
     </Box>
-
   );
 };

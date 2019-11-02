@@ -14,7 +14,7 @@ export const AmenitiesContainer: React.FunctionComponent = () => {
     const classes = useStyles()
     return (
         <>
-        <Grid container xs={12} spacing={1} className={classes.container}>
+        <Grid container  spacing={1} className={classes.container}>
             <Grid item>
                 <Typography variant="subtitle2">
                     capacity

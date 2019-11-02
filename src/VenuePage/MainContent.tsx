@@ -4,7 +4,7 @@ import { AmenitiesContainer } from "./AmenitiesContainer";
 import { VenueOverviewContent } from "./VenueOverviewContent";
 import { VenueTitleContent } from "./VenueTitleContent";
 import { VenueIntro } from "./VenueIntro";
-import { VenueGallery } from "./VenueGallery";
+import { VenueGallery, imageList } from "./VenueGallery";
 
 const useStyles = makeStyles((theme: Theme)=> ({
   mainBody: {
@@ -18,12 +18,12 @@ export const MainContent: React.FunctionComponent = () => {
   const handleChange = (newValue: number): void => {
     setValue(newValue);
   };
-
+  // TODO remove manually imported imageList
   return (
     <>
       <Grid container spacing={1} >
         <Grid item xs={12}>
-          <VenueGallery />
+          <VenueGallery imageUrlList={imageList}/>
 
           <VenueTitleContent />
           <Paper elevation={0}  >

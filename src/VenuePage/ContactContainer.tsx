@@ -4,7 +4,6 @@ import { SidePanelHeader } from "./SidePanelHeader";
 import { EmailForm } from "./EmailForm";
 import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
-import LinearProgress from "@material-ui/core/LinearProgress";
 
 interface ContactContainerProps {
   phone: number | string;
@@ -38,7 +37,6 @@ export const ContactContainer: React.FunctionComponent<
       return (
         <Typography className={classes.phoneNumber}>
           {phone}
-          <LinearProgress />
         </Typography>
       );
     }

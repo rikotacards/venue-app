@@ -1,14 +1,18 @@
 import React from "react";
-import { Grid, Tabs, Tab, Paper, Typography, Theme, makeStyles } from "@material-ui/core";
+import { Tabs, Tab, Paper, Typography, Theme, makeStyles } from "@material-ui/core";
 import { AmenitiesContainer } from "./AmenitiesContainer";
 import { VenueOverviewContent } from "./VenueOverviewContent";
-import { VenueTitleContent } from "./VenueTitleContent";
 import { VenueIntro } from "./VenueIntro";
 import { VenueGallery, imageList } from "./VenueGallery";
 
 const useStyles = makeStyles((theme: Theme)=> ({
   mainBody: {
     border: 0
+  },
+  venueName: {
+    textAlign: "left",
+      paddingTop: theme.spacing(1),
+      margin: theme.spacing(0, 1)
   }
 }))
 
@@ -21,11 +25,12 @@ export const MainContent: React.FunctionComponent = () => {
   // TODO remove manually imported imageList
   return (
     <>
-      <Grid container spacing={1} >
-        <Grid item xs={12}>
+    
           <VenueGallery imageUrlList={imageList}/>
 
-          <VenueTitleContent />
+          <Typography variant="h6" className={classes.venueName}>
+            Grand Hyatt
+          </Typography>
           <Paper elevation={0}  >
             <Tabs value={value} indicatorColor="primary" textColor="primary">
               <Tab label="overview" onClick={() => handleChange(0)} />
@@ -37,8 +42,7 @@ export const MainContent: React.FunctionComponent = () => {
           {value === 1 && <AmenitiesContainer />}
 
           
-        </Grid>
-      </Grid>
+      
     </>
   );
 };

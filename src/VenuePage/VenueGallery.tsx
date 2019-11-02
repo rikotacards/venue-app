@@ -12,12 +12,11 @@ const useGalleryStyles = makeStyles(theme => ({
     overflow: "hidden",
     // minWidth: "500px",
     maxWidth: isMobile()?  "100%": "600px",
-    maxHeight: '370px',
+    maxHeight: isMobile() ? '250px': '370px',
     backgroundColor: theme.palette.background.paper,
     width: '100%'
   },
   individualImage: {
-    marginRight: theme.spacing(1),
     maxWidth: "100%",
     objectFit: 'cover'
   },
@@ -30,7 +29,7 @@ const useGalleryStyles = makeStyles(theme => ({
       background: theme.palette.action.hover
     },
     height: "100%",
-    left: "88%"
+    left: isMobile() ? "85%" : '88%'
   },
   leftButton: {
     display: "flex",
@@ -42,9 +41,7 @@ const useGalleryStyles = makeStyles(theme => ({
     },
     height: "100%"
   },
-  progressBar: {
-    width: '100%'
-  }
+
 }));
 
 // TODO will be an array of images
@@ -102,7 +99,7 @@ export const VenueGallery: React.FunctionComponent<
           <ChevronRight />
         </Button>
       </Box>
-        <LinearProgress variant="determinate" value={linearProgressPercentage} className={classes.progressBar}/>
+        <LinearProgress variant="determinate" value={linearProgressPercentage} />
     </>
   );
 };

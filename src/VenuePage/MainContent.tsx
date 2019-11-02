@@ -1,9 +1,10 @@
 import React from "react";
-import { Tabs, Tab, Paper, Typography, Theme, makeStyles } from "@material-ui/core";
+import { Tabs, Tab, Paper, Typography, Theme, makeStyles, Box } from "@material-ui/core";
 import { AmenitiesContainer } from "./AmenitiesContainer";
 import { VenueOverviewContent } from "./VenueOverviewContent";
 import { VenueIntro } from "./VenueIntro";
 import { VenueGallery, imageList } from "./VenueGallery";
+import { isMobile } from "../device";
 
 const useStyles = makeStyles((theme: Theme)=> ({
   mainBody: {
@@ -13,6 +14,9 @@ const useStyles = makeStyles((theme: Theme)=> ({
     textAlign: "left",
       paddingTop: theme.spacing(1),
       margin: theme.spacing(0, 1)
+  },
+  tabsInfo:{
+    margin: isMobile() ? theme.spacing(2): 0
   }
 }))
 
@@ -37,11 +41,12 @@ export const MainContent: React.FunctionComponent = () => {
               <Tab label="Amenities" onClick={() => handleChange(1)} />
             </Tabs>
           </Paper>
+          <Box className={classes.tabsInfo}>
           {value === 0 && <VenueOverviewContent />}
           {value === 0 && <VenueIntro />}
           {value === 1 && <AmenitiesContainer />}
 
-          
+          </Box>
       
     </>
   );

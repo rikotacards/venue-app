@@ -81,9 +81,9 @@ export const VenuePageContainer: React.FunctionComponent<
           <MainContent />
         </Paper>
       </Grid>
-      <Grid item xs={4} className={classes.venuHeader}>
-        {isDesktop() && rightSideColumn}
-      </Grid>
+      {isDesktop()? (<Grid item xs={4} className={classes.venuHeader}>
+        {rightSideColumn}
+      </Grid>) : null}
     </Grid>
     </Box>
 

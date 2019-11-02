@@ -5,7 +5,7 @@ import { Theme, Typography } from '@material-ui/core';
 const useVenueIntroStyles = makeStyles((theme: Theme) => ({
     root: {
       textAlign: "left",
-      margin: '16px'
+      // margin: '16px'
     }
   }));
 

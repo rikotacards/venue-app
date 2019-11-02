@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Grid,
-  Button,
   makeStyles,
   Theme,
   Typography,
@@ -46,7 +45,7 @@ export const OtherDetailsContainer: React.FunctionComponent<
   return (
     <>
       <SidePanelHeader headerText={"Details"} />
-      <Grid container={true} classes={classes} spacing={3}>
+      <Grid container={true} className={classes.root} spacing={3}>
         <Grid item={true} xs={12} className={classes.item}>
           <Box display="flex" flexDirection="row">
             <AspectRatioIcon className={classes.icon} />

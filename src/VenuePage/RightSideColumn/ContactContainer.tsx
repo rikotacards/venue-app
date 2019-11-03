@@ -4,6 +4,7 @@ import { SidePanelHeader } from "./SidePanelHeader";
 import { EmailForm } from "./EmailForm";
 import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
+import CallEndIcon from '@material-ui/icons/CallEnd';
 
 interface ContactContainerProps {
   phone: number | string;
@@ -36,7 +37,7 @@ export const ContactContainer: React.FunctionComponent<
     if (showNumber) {
       return (
         <Typography className={classes.phoneNumber}>
-          {phone}
+          <a href="tel: +85264167065">call</a>{phone}
         </Typography>
       );
     }
@@ -48,7 +49,7 @@ export const ContactContainer: React.FunctionComponent<
 
   return (
     <>
-      <SidePanelHeader headerText={"Contact Venue"} />
+      <SidePanelHeader headerText={"Contact Venue Directly"} />
       <Grid container={true} classes={classes} spacing={1}>
         <Grid item={true} xs={6}>
           <Button

@@ -10,7 +10,7 @@ interface VenueListProps {
 
 const useStyles = makeStyles((theme) => ({
     overlay: {
-        background: (isOpen: boolean) => isMobile() ? (isOpen  ? 'black': 'transparent') : 'transparent',
+        background: (isOpen: boolean) => isMobile() ? (isOpen  ? 'grey': 'transparent') : 'transparent',
     },
     venueListContainer: {
         opacity: (isOpen: boolean) => isMobile() ? (isOpen ? 0.3 : 1) : 1

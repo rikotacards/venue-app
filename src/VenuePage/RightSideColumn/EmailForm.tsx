@@ -1,15 +1,38 @@
 import React from "react";
 import {
   TextField,
-  Input,
-  makeStyles,
-  Theme,
   Button,
   Grid,
   Typography
 } from "@material-ui/core";
+import axios, { AxiosResponse } from 'axios';
 
 export const EmailForm: React.FunctionComponent = () => {
+  let [firstName, setFirstName] = React.useState('');
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+     firstName =  event.target.value; 
+     setFirstName(firstName);
+
+  }
+  const handleSubmit = () => {
+    console.log('Email submit button')
+    axios({
+      method: 'POST', 
+      url: '/send',
+      data: {
+        firstName
+      }
+    })
+    .then((response:AxiosResponse<any>) => {
+      if(response.data.msg==='success'){
+        console.log(response)
+        console.log('successful send')
+      }
+      console.log('nope')
+    })
+  }
+
+
   return (
     <>
       <Typography variant="h6"> Your contact details</Typography>
@@ -23,6 +46,7 @@ export const EmailForm: React.FunctionComponent = () => {
             fullWidth
             margin="dense"
             variant="outlined"
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={6}>
@@ -113,7 +137,7 @@ export const EmailForm: React.FunctionComponent = () => {
           />
         </Grid>
         <Grid item xs={12}> 
-        <Button variant="contained" fullWidth color="primary">
+        <Button variant="contained" fullWidth color="primary" onClick={handleSubmit}>
         <Typography>Submit</Typography>
       </Button>
         </Grid>

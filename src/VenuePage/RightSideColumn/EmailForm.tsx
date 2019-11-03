@@ -12,7 +12,6 @@ export const EmailForm: React.FunctionComponent = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
      firstName =  event.target.value; 
      setFirstName(firstName);
-     console.log(firstName)
 
   }
   const handleSubmit = () => {

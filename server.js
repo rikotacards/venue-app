@@ -11,37 +11,8 @@ const bodyParser = require("body-parser");
 const creds = require("./config");
 const port = process.env.PORT || 5000;
 
-const transport = {
-  service: 'Gmail',
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: 'true',
-  // auth: {
-  //   user: creds.USER,
-  //   pass: creds.PASS
-  // }
-  auth: {
-    type: "OAuth2",
-    user: creds.USER,
-    // pass: creds.PASS,
-    clientId:
-      "912237516032-2351hsk80lhhsqjef5mifd6ihp9tp4ei.apps.googleusercontent.com",
-    // clientId: '272399903195-82idp9t0c94fnejt4or78b776qtkto6t.apps.googleusercontent.com',
-    clientSecret: "KqKn61tzBhzLGfpGbHyol1sm",
-    // clientSecret: creds.CLIENTSEC,
-    refreshToken:
-     "1//04SfmAV-UmlaYCgYIARAAGAQSNwF-L9IrcSH0NWfYkhb96U5JSTU2Ek-y0z4N71FJlz29BZ79ggAClvzeaYQJEzcbBi4_Jh-qMdE", //<- venueeventshk@gmail.com
-    // refreshToken: '1/XXxXxsss-1//048Tq1iWktsRrCgYIARAAGAQSNwF-L9IrvouA6o4lK0Dho1Y4zrnvkm2jbN2ruYLiC7lSfVC2wMoaoJXwHBGK5ytu2Co-oB971m0',
-    accessToken:
-      "ya29.Il-vB1ejtTClip7BbhYr_bCljpJ4FfXC___GQwSnQYNlg3N-SWrxlxLhpj4uA0KcJE8_S_RUdWboPmbbp_18Oqe9aUBkHA6eh0aPYGusKRAsEqTgESZEoUrGgGPRuPJ1xw",
-    // accessToken: 'ya29.Il-vB-8ZfzYnL8FCcQTZMy3VjziIyMsYxLhb5nnuOcguQ9aXqfKX6g4tNbghLKR2Z9DKDhsDwH0iv8GJp9o5sIhs8VbcSZUY_N75oQu2eB2obRAUMMFATfmK3mYAX9rSKQ'
-    tls: {
-      rejectUnauthorized: false
-    }
-  }
-};
 
-let transporter = nodemailer.createTransport('smtps://venueeventshk%40gmail.com:iccmqdsnquihgnrs@smtp.gmail.com');
+let transporter = nodemailer.createTransport(`smtps://${creds.EMAIL}:${creds.PASS}@smtp.gmail.com`);
 
 transporter.verify((error, success) => {
   if (error) {
@@ -81,7 +52,7 @@ app.post("/send", (req, res, next) => {
     from: creds.USER,
     to: "maxhsu1@gmail.com",
     subject: "Contact form request",
-    html: '<p>{name}</p>'
+    html: `<p>${name}</p>`
   };
 
   transporter.sendMail(mail, (err, data) => {

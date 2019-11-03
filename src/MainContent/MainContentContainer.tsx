@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { venueData } from "../FakeData/venueData";
 import { VenueList } from "../VenueList/VenueList";
-import { Typography } from "@material-ui/core";
+import { Typography, Theme, Box } from "@material-ui/core";
 import { Route, Switch } from "react-router";
 import { VenuePageContainer } from "../VenuePage/VenuePageContainer";
+import { makeStyles } from "@material-ui/styles";
 const axios = require('axios').default;
 
 interface MainContentContainerProps {
   eventType: string;
+  isOpen?: boolean; 
 }
 
 // MainContentContainer will pass down the Event Type (eg Annual Dinner)
@@ -30,11 +32,12 @@ export const MainContentContainer: React.FunctionComponent<
   return (
     <Switch>
       <Route path="/what">
-        <VenuePageContainer venueId={"hotel_1"} />
+        <VenuePageContainer venueId={"hotel_1"} isOpen={props.isOpen}/>
+    
       </Route>
 
       <Route path="/">
-        <VenueList venueListData={venueListData} />
+        <VenueList venueListData={venueListData} isOpen={props.isOpen}/>
       </Route>
     </Switch>
   );

@@ -9,6 +9,7 @@ import { SideBarWithRouter } from "../SideBarNav/SideBar";
 import { MainContentContainer } from "../MainContent/MainContentContainer";
 import clsx from "clsx";
 import { functionTypes } from "../FakeData/functionTypes";
+import { isMobile } from "../device";
 
 const useButtonStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -21,7 +22,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: "flex"
+      display: "flex",
     },
     menuButton: {
       marginRight: theme.spacing(2)
@@ -34,12 +35,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
+      padding: isMobile()? 0 : theme.spacing(3),
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
       }),
-      marginLeft: -drawerWidth
+      marginLeft: -drawerWidth,
+      marginRight: 0
     },
     contentShift: {
       transition: theme.transitions.create("margin", {
@@ -58,7 +60,7 @@ export const DenseAppBar = () => {
   const classes = useStyles();
   const buttonClasses = useButtonStyles();
   const [isOpen, setOpenClose] = React.useState(true);
-  const [eventType, setEventType] = React.useState('Annual Dinner') // TODO
+  const [eventType, setEventType] = React.useState('Annual Dinner') // TODO use featured
   const [functionSelected, setFunction] = React.useState("Corporate Events");
   
   const handleFunctionClick = (functionName: string) => {
@@ -105,7 +107,7 @@ export const DenseAppBar = () => {
         })}
       >
         <div className={classes.toolbar} />
-        <MainContentContainer eventType={eventType} />
+        <MainContentContainer eventType={eventType} isOpen={isOpen}/>
       </main>
     </div>
   );

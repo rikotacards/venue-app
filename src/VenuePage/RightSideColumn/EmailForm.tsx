@@ -8,7 +8,6 @@ import {
   Grid,
   Typography
 } from "@material-ui/core";
-import { SidePanelHeader } from "./SidePanelHeader";
 
 export const EmailForm: React.FunctionComponent = () => {
   return (

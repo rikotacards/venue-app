@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles, Box, Button, LinearProgress } from "@material-ui/core";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import { isMobile } from "../device";
 
 const useGalleryStyles = makeStyles(theme => ({
   galleryContainer: {
@@ -10,15 +11,14 @@ const useGalleryStyles = makeStyles(theme => ({
     flexWrap: "nowrap",
     overflow: "hidden",
     // minWidth: "500px",
-    maxWidth: "600px",
-    maxHeight: '370px',
+    maxWidth: isMobile()?  "100%": "600px",
+    maxHeight: isMobile() ? '250px': '370px',
     backgroundColor: theme.palette.background.paper,
-    overflowX: "auto",
-    whiteSpace: "nowrap"
+    width: '100%'
   },
   individualImage: {
-    marginRight: theme.spacing(1),
-    // objectFit: 'cover'
+    maxWidth: "100%",
+    objectFit: 'cover'
   },
   rightButton: {
     display: "flex",
@@ -29,7 +29,7 @@ const useGalleryStyles = makeStyles(theme => ({
       background: theme.palette.action.hover
     },
     height: "100%",
-    left: "88%"
+    left: isMobile() ? "85%" : '88%'
   },
   leftButton: {
     display: "flex",
@@ -41,9 +41,7 @@ const useGalleryStyles = makeStyles(theme => ({
     },
     height: "100%"
   },
-  progressBar: {
-    width: '100%'
-  }
+
 }));
 
 // TODO will be an array of images
@@ -84,27 +82,16 @@ export const VenueGallery: React.FunctionComponent<
     return null;
   }
 
-  // Used to generate an array for scrolling
-  const images = imageUrlList.map((imageUrl, index) => {
-    return (
-      <Box className={classes.individualImage} key={index}>
-        <img src={imageUrl} />
-      </Box>
-    );
-  });
-
-
-  // SCROLL VIEW
   return (
     <>
-      <Box display="flex" flexDirection="row" position="relative">
+      <Box display="flex" flexDirection="row" position="relative" width='100%'>
         <Button className={classes.leftButton} onClick={prevImageButton}>
           <ChevronLeftIcon />
         </Button>
         <Box className={classes.galleryContainer}>
-          <Box className={classes.individualImage}>
-            <img src={imageUrlList[imageIndex]} />
-          </Box>
+        
+            <img src={imageUrlList[imageIndex]} className={classes.individualImage} />
+         
 
         </Box>
         {/* <Box className={classes.galleryContainer}>{clickViewImage}</Box> */}
@@ -112,7 +99,7 @@ export const VenueGallery: React.FunctionComponent<
           <ChevronRight />
         </Button>
       </Box>
-        <LinearProgress variant="determinate" value={linearProgressPercentage} className={classes.progressBar}/>
+        <LinearProgress variant="determinate" value={linearProgressPercentage} />
     </>
   );
 };

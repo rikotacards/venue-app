@@ -7,12 +7,39 @@ import {
 } from "@material-ui/core";
 import axios, { AxiosResponse } from 'axios';
 
-export const EmailForm: React.FunctionComponent = () => {
-  let [firstName, setFirstName] = React.useState('');
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-     firstName =  event.target.value; 
-     setFirstName(firstName);
+interface formType {
+  firstName: string; 
+  lastName: string; 
+  email: string; 
+  phone: string; 
+  eventType: string; 
+  budgetPerHead: string; 
+  noOfGuests: string; 
+  eventDate: string; 
+  time: string; 
+  duration: string; 
+  messageBox: string;
+}
 
+export const EmailForm: React.FunctionComponent = () => {
+  let [form, setFormField] = React.useState<Record<string, string | number>>({
+    firstName: '', 
+    lastName: '', 
+    email: '', 
+    phone: '', 
+    eventType: '', 
+    budgetPerHead: '', 
+    noOfGuests: '', 
+    eventDate: '', 
+    time: '', 
+    duration: '', 
+    messageBox: ''
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    form[event.target.name] = event.target.value
+     setFormField(form);
+    console.log(form)
   }
   const handleSubmit = () => {
     console.log('Email submit button')
@@ -20,7 +47,7 @@ export const EmailForm: React.FunctionComponent = () => {
       method: 'POST', 
       url: '/send',
       data: {
-        firstName
+        form
       }
     })
     .then((response:AxiosResponse<any>) => {
@@ -43,6 +70,7 @@ export const EmailForm: React.FunctionComponent = () => {
         <Grid item xs={6}>
           <TextField
             placeholder="First Name"
+            name="firstName"
             fullWidth
             margin="dense"
             variant="outlined"
@@ -52,33 +80,41 @@ export const EmailForm: React.FunctionComponent = () => {
         <Grid item xs={6}>
           <TextField
             placeholder="Last Name"
+            name="lastName"
             fullWidth
             margin="dense"
             variant="outlined"
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
             placeholder="Email"
+            name="email"
             fullWidth
             margin="dense"
             variant="outlined"
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
             placeholder="Phone"
+            name="phone"
             fullWidth
             margin="dense"
             variant="outlined"
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
             placeholder="Event Type"
+            name="eventType"
             fullWidth
             margin="dense"
             variant="outlined"
+            onChange={handleChange}
           />
         </Grid>
       </Grid>
@@ -90,50 +126,62 @@ export const EmailForm: React.FunctionComponent = () => {
         <Grid item xs={6}>
           <TextField
             placeholder="Budget per head"
+            name="budgetPerHead"
             fullWidth
             margin="dense"
             variant="outlined"
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={6}>
           <TextField
             placeholder="Guests"
+            name="noOfGuests"
             fullWidth
             margin="dense"
             variant="outlined"
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={6}>
           <TextField
             placeholder="Event Date"
+            name="eventDate"
             fullWidth
             margin="dense"
             variant="outlined"
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={6}>
           <TextField
             placeholder="Time"
+            name="time"
             fullWidth
             margin="dense"
             variant="outlined"
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
             placeholder="Duration"
+            name="duration"
             fullWidth
             margin="dense"
             variant="outlined"
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
+           name='messageBox'
             multiline
             fullWidth
             rows="4"
             rowsMax="4"
             variant="outlined"
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}> 

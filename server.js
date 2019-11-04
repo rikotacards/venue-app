@@ -1,18 +1,18 @@
 // send emails: https://stackoverflow.com/questions/48854066/missing-credentials-for-plain-nodemailer
 // NOt required to use xoatuh2, there was an issue when you don't include access token
 // Access token is received from the Google Oauth playground.
-
+const dotenv = require("dotenv");
 const nodemailer = require("nodemailer");
 const express = require("express");
 const app = express();
 const pg = require("./database/index");
 const bodyParser = require("body-parser");
-
 const creds = require("./config");
 const port = process.env.PORT || 5000;
-
-
-let transporter = nodemailer.createTransport(`smtps://${creds.EMAIL}:${creds.PASS}@smtp.gmail.com`);
+dotenv.config();
+let transporter = nodemailer.createTransport(
+  `smtps://${process.env.APP_EMAIL}:${process.env.APP_PASS}@smtp.gmail.com`
+);
 
 transporter.verify((error, success) => {
   if (error) {
@@ -43,16 +43,27 @@ app.use(express.json());
 
 app.post("/send", (req, res, next) => {
   console.log("POST /send endpoint hit");
-  console.log(req.body);
-  const name = req.body.firstName;
-  const email = req.body.email;
-  const message = req.body.messageHtml;
+  console.log(req.body.form);
+  const form = req.body.form;
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    eventType,
+    budgetPerHead,
+    noOfGuests,
+    eventDate,
+    time,
+    duration,
+    messageBox
+  } = form;
 
   let mail = {
     from: creds.USER,
     to: "maxhsu1@gmail.com",
     subject: "Contact form request",
-    html: `<p>${name}</p>`
+    html: `<p>${firstName}</p><p>${lastName}</p><p>${email}</p><p>${phone}</p>`
   };
 
   transporter.sendMail(mail, (err, data) => {

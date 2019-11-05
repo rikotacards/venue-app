@@ -4,7 +4,8 @@ import { SidePanelHeader } from "./SidePanelHeader";
 import { EmailForm } from "./EmailForm";
 import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
-import CallEndIcon from '@material-ui/icons/CallEnd';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 interface ContactContainerProps {
   phone: number | string;

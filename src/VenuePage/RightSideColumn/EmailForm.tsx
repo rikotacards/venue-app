@@ -8,7 +8,6 @@ import {
   Theme
 } from "@material-ui/core";
 import axios, { AxiosResponse } from "axios";
-import LinearProgress from '@material-ui/core/LinearProgress';
 
 interface formType {
   firstName: string;
@@ -48,7 +47,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const EmailForm: React.FunctionComponent = () => {
   const [firstNameError, toggleFirstNameError] = React.useState<boolean>(false);
   const [lastNameError, toggleLastNameError] = React.useState<boolean>(false);
-  console.log("EMAIL FORM RENDER", firstNameError, "lastname", lastNameError);
   const [emailError, toggleEmailError] = React.useState<boolean>(false);
   const [phoneError, togglePhoneError] = React.useState<boolean>(false);
   const [messageBoxError, toggleMessageBoxError] = React.useState<boolean>(false);

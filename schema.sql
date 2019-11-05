@@ -2,6 +2,8 @@ CREATE DATABASE venues;
 
 \c venues;
 
+DROP TABLE IF EXISTS venuedetails; 
+
 CREATE TABLE IF NOT EXISTS venuedetails (
     id SERIAL PRIMARY KEY, 
     venueName varchar (50),

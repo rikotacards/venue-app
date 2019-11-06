@@ -39,6 +39,19 @@ app.post("/api/world", (req, res) => {
   );
 });
 
+//INITIAL DATA GRAB OF VENUES
+app.get("/api/retrieveVenues", async (req, res) => {
+  try {
+    console.log("getting all venues");
+    const output = await pg.getAllItems();
+    console.log(output);
+    res.status(200).json(output);
+  } catch (error) {
+    throw new Error("failed to get data");
+  }
+});
+
+// EMAIL SENDING
 app.use(express.json());
 
 app.post("/send", (req, res, next) => {

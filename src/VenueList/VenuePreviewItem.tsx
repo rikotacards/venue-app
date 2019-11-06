@@ -10,10 +10,11 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { VenueStatsContainer } from "./VenueItemStats";
 import { Link } from "react-router-dom";
+import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(1)
   },
   media: {
     height: 240
@@ -26,18 +27,36 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   statsTextAlign: {
     textAlign: "left"
+  },
+  divider: {
+    margin: theme.spacing(1,0)
   }
 }));
 
 interface VenuePreviewItemProps {
   venueName: string; // TODO use venue IDs in the future
+  id: number;
+  description?: string;
+  capacitySitting?: number;
+  capacityStanding?: number;
+  address?: string;
+  budgetPerHead?: number;
 }
 
 export const VenuePreviewItem: React.FunctionComponent<
   VenuePreviewItemProps
 > = props => {
   // TODO Button on click action open new tab
-
+  // TODO, use ID
+  const {
+    venueName,
+    id,
+    description,
+    capacityStanding,
+    capacitySitting,
+    budgetPerHead,
+    address
+  } = props;
   const classes = useStyles();
   return (
     <Card className={classes.card}>
@@ -49,13 +68,18 @@ export const VenuePreviewItem: React.FunctionComponent<
         />
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
-            {props.venueName}
+            {venueName}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {description}
           </Typography>
-          <VenueStatsContainer venueName={props.venueName} />
+          <Divider className={classes.divider}/>
+          <VenueStatsContainer
+            capacitySitting={capacitySitting}
+            capacityStanding={capacityStanding}
+            budgetPerHead={budgetPerHead}
+            address={address}
+          />
         </CardContent>
       </CardActionArea>
 
@@ -65,7 +89,6 @@ export const VenuePreviewItem: React.FunctionComponent<
         </Button>
 
         <Button size="small" color="primary">
-          Contact Venue Through Us (15% Off)
         </Button>
       </CardActions>
     </Card>

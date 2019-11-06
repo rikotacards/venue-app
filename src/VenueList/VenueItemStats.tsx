@@ -1,11 +1,13 @@
 import React from 'react'; 
 import { Typography } from '@material-ui/core'
-import { venueDetailsData } from '../FakeData/VenueDetailsData';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 
 interface StatsProps {
-    venueName: string; 
+    capacitySitting?: number; 
+    capacityStanding?: number; 
+    budgetPerHead?: number; 
+    address?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -15,13 +17,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 export const VenueStatsContainer: React.FunctionComponent<StatsProps> = (props) => {
-    const { address, capacitySitting, capacityStanding, perHeadBudget} = venueDetailsData.hotel_1
+    const { address, capacitySitting, capacityStanding, budgetPerHead} = props;
     const classes = useStyles();
     
     return (
         <>
         <Typography classes={classes}  variant="body2" color="textSecondary" component="p">
-            Price/head: {perHeadBudget}
+            Price/head: {budgetPerHead}
         </Typography>
         <Typography classes={classes} variant="body2" color="textSecondary" component="p">
             address: {address}

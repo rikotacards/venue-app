@@ -26,30 +26,32 @@ transporter.verify((error, success) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/api/hello", async (req, res) => {
-  console.log("server hit");
-  const output = await pg.getAllItems();
-  res.send({ express: "Hello From Express" });
-});
 
-app.post("/api/world", (req, res) => {
-  console.log(req.body);
-  res.send(
-    `I received your POST request. This is what you sent me: ${req.body.post}`
-  );
-});
 
 //INITIAL DATA GRAB OF VENUES
-app.get("/api/retrieveVenues", async (req, res) => {
+app.get("/api/retrieveAllVenues", async (req, res) => {
   try {
     console.log("getting all venues");
     const output = await pg.getAllItems();
-    console.log(output);
     res.status(200).json(output);
   } catch (error) {
     throw new Error("failed to get data");
   }
 });
+
+// GRAB VENUES WITH SPECIFIC FUNCTION TYPE
+app.get("/api/venues/:functionType/:eventType/", async (req, res)=> {
+  try{
+    console.log('params', req.params)
+    const { functionType, eventType } = req.params;
+
+
+   const output = await pg.getVenuesByFunctionEventType(functionType, eventType)
+    res.status(200).json(output);
+  } catch (error) {
+    throw new Error ('no params')
+  }
+})
 
 // EMAIL SENDING
 app.use(express.json());

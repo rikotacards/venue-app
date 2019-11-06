@@ -4,7 +4,8 @@ interface EventTypeData {
 
 // Side Bar Nav uses this list to render Items
 export const eventTypes: EventTypeData = {
-    'Corporate Events': [
+    'corporate-events': [
+        'Featured',
         'Annual Dinner',
         'Breakfast Meetings',
         'Business Meeting', 
@@ -19,8 +20,8 @@ export const eventTypes: EventTypeData = {
         'Training / Team Building / Off-side',
         'Wine tasting'
     ], 
-    'Party' : [
-        'All Party', 
+    'party' : [
+        'Featured', 
         'Alumni Event', 
         'Anniversary', 
         'Birthday Party', 

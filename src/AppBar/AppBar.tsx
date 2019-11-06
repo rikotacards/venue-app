@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import { SideBarWithRouter } from "../SideBarNav/SideBar";
 import { MainContentContainer } from "../MainContent/MainContentContainer";
 import clsx from "clsx";
-import { functionTypes } from "../FakeData/functionTypes";
+import { functionTypes, displayFunctionTypes } from "../DataTypes/functionTypes";
 import { isMobile } from "../device";
 
 const useButtonStyles = makeStyles((theme: Theme) => ({
@@ -60,8 +60,8 @@ export const DenseAppBar = () => {
   const classes = useStyles();
   const buttonClasses = useButtonStyles();
   const [isOpen, setOpenClose] = React.useState(true);
-  const [eventType, setEventType] = React.useState('Annual Dinner') // TODO use featured
-  const [functionSelected, setFunction] = React.useState("Corporate Events");
+  const [eventType, setEventType] = React.useState('Featured') // TODO use featured
+  const [functionSelected, setFunction] = React.useState("corporate-events");
   
   const handleFunctionClick = (functionName: string) => {
     setFunction(functionName);
@@ -77,7 +77,7 @@ export const DenseAppBar = () => {
         key={functions}
         onClick={() => handleFunctionClick(functions)}
       >
-        {functions}
+        {displayFunctionTypes[functions]}
       </Button>
     );
   });
@@ -107,7 +107,7 @@ export const DenseAppBar = () => {
         })}
       >
         <div className={classes.toolbar} />
-        <MainContentContainer eventType={eventType} isOpen={isOpen}/>
+        <MainContentContainer eventType={eventType} isOpen={isOpen} functionSelected={functionSelected}/>
       </main>
     </div>
   );

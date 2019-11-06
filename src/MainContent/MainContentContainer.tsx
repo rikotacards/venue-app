@@ -9,54 +9,59 @@ const axios = require("axios").default;
 
 interface MainContentContainerProps {
   eventType: string;
+  functionSelected? : string;
   isOpen?: boolean;
 }
 
-interface VenueDataType {
+export interface VenueDataType {
   id: number;
   venuename: string;
+  featured: boolean;
   venueaddress: string;
   venuedescription: string;
   phonenumber: string;
   email: string;
-  capacitystanding: string;
-  capacitysitting: string;
+  capacitystanding: number;
+  capacitysitting: number;
   venuetype: string;
   venuesize: string;
   budgetperhead: number;
   category?: string[];
 }
 
-// MainContentContainer will pass down the Event Type (eg Annual Dinner)
+
 // TODO Add a featured section in here above lists
 let MainContentContainer: React.FunctionComponent<
   MainContentContainerProps
 > = props => {
-  const venueListData = venueData[props.eventType];
-  const [appState, populateAppState] = React.useState<VenueDataType[] | null>(null);
-console.log('before')
+  const { isOpen, eventType, functionSelected } = props; 
+  const [appState, populateAppState] = React.useState<VenueDataType[] | null>(
+    null
+  );
   useEffect(() => {
-    axios.get("/api/retrieveVenues").then((response: AxiosResponse) => {
+    console.log('useeffect', functionSelected, eventType)
+    axios.get(`/api/venues/${functionSelected}/${eventType}`)
+    .then((response: AxiosResponse) => {
       populateAppState(response.data);
     });
-  }, []);
-console.log(appState);
-  if (!venueListData) {
+  }, [functionSelected, eventType]);
+  console.log('App state', appState);
+  if (!appState || !appState.length) {
     return <Typography>No venues in this category</Typography>;
   }
   return (
     <Switch>
       <Route path="/what">
-        <VenuePageContainer venueId={"hotel_1"} isOpen={props.isOpen} />
+        <VenuePageContainer venueId={"hotel_1"} isOpen={isOpen} />
       </Route>
 
       <Route path="/">
-        <VenueList venueListData={venueListData} isOpen={props.isOpen} />
+        <VenueList venueListData={appState} isOpen={isOpen} />
       </Route>
     </Switch>
   );
 };
 
-MainContentContainer = React.memo(MainContentContainer)
+MainContentContainer = React.memo(MainContentContainer);
 
 export { MainContentContainer };

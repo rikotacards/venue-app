@@ -10,6 +10,7 @@ import { MainContentContainer } from "../MainContent/MainContentContainer";
 import clsx from "clsx";
 import { functionTypes, displayFunctionTypes } from "../DataTypes/functionTypes";
 import { isMobile } from "../device";
+import { withRouter, RouteComponentProps } from "react-router";
 
 const useButtonStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -55,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export const DenseAppBar = () => {
+export const TopAppBar: React.FunctionComponent< RouteComponentProps> = withRouter((props) => {
 
   const classes = useStyles();
   const buttonClasses = useButtonStyles();
@@ -75,7 +76,9 @@ export const DenseAppBar = () => {
       <Button
         classes={buttonClasses}
         key={functions}
-        onClick={() => handleFunctionClick(functions)}
+        onClick={() => {
+          props.history.push(functions)
+          handleFunctionClick(functions)}}
       >
         {displayFunctionTypes[functions]}
       </Button>
@@ -110,5 +113,6 @@ export const DenseAppBar = () => {
         <MainContentContainer eventType={eventType} isOpen={isOpen} functionSelected={functionSelected}/>
       </main>
     </div>
-  );
-};
+  )
+}
+)

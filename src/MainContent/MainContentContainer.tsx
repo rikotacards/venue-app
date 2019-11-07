@@ -29,8 +29,6 @@ export interface VenueDataType {
   category?: string[];
 }
 
-
-// TODO Add a featured section in here above lists
 let MainContentContainer: React.FunctionComponent<
   MainContentContainerProps
 > = props => {

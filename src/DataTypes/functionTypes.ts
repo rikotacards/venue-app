@@ -1,9 +1,10 @@
 // Main event functions eg, Corporate events. These appear in the top app bar.
 export const functionTypes = [
+//   "home",
   "corporate-events",
   "party",
   "wedding",
-  "event-services"
+//   "event-services"
 ];
 
 export interface DisplayFunctionTypes {
@@ -12,7 +13,8 @@ export interface DisplayFunctionTypes {
 
 // DISPLAYED ALONG THE TOP MENU #MENU
 export const displayFunctionTypes: DisplayFunctionTypes = {
-  "corporate-events": "Corporate Events",
+  home: "Home",
+  "corporate-events": "Corporate",
   party: "Party",
   wedding: "Wedding",
   "event-services": "Event Services"

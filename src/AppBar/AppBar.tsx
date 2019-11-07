@@ -60,9 +60,9 @@ export const TopAppBar: React.FunctionComponent< unknown > = () => {
 
   const classes = useStyles();
   const buttonClasses = useButtonStyles();
-  const [isOpen, setOpenClose] = React.useState(true);
-  const [eventType, setEventType] = React.useState('Featured') // TODO use featured
-  const [functionSelected, setFunction] = React.useState("corporate-events");
+  const [isOpen, setOpenClose] = React.useState<boolean>(true);
+  const [eventType, setEventType] = React.useState<string>('Featured') // TODO use featured
+  const [functionSelected, setFunction] = React.useState<string>("corporate-events");
   
   const handleFunctionClick = (functionName: string) => {
     setFunction(functionName);

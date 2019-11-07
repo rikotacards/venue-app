@@ -4,6 +4,7 @@ interface EventTypeData {
 
 // Side Bar Nav uses this list to render Items
 export const eventTypes: EventTypeData = {
+   
     'corporate-events': [
         'Featured',
         'Annual Dinner',

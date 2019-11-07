@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export const TopAppBar: React.FunctionComponent< RouteComponentProps> = withRouter((props) => {
+export const TopAppBar: React.FunctionComponent< unknown > = () => {
 
   const classes = useStyles();
   const buttonClasses = useButtonStyles();
@@ -77,7 +77,7 @@ export const TopAppBar: React.FunctionComponent< RouteComponentProps> = withRout
         classes={buttonClasses}
         key={functions}
         onClick={() => {
-          props.history.push(functions)
+          
           handleFunctionClick(functions)}}
       >
         {displayFunctionTypes[functions]}
@@ -115,4 +115,4 @@ export const TopAppBar: React.FunctionComponent< RouteComponentProps> = withRout
     </div>
   )
 }
-)
+

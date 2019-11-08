@@ -8,7 +8,10 @@ import Button from "@material-ui/core/Button";
 import { SideBarWithRouter } from "../SideBarNav/SideBar";
 import { MainContentContainer } from "../MainContent/MainContentContainer";
 import clsx from "clsx";
-import { functionTypes, displayFunctionTypes } from "../DataTypes/functionTypes";
+import {
+  functionTypes,
+  displayFunctionTypes
+} from "../DataTypes/functionTypes";
 import { isMobile } from "../device";
 import { withRouter, RouteComponentProps } from "react-router";
 
@@ -23,7 +26,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: "flex",
+      display: "flex"
     },
     menuButton: {
       marginRight: theme.spacing(2)
@@ -36,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     content: {
       flexGrow: 1,
-      padding: isMobile()? 0 : theme.spacing(3),
+      padding: isMobile() ? 0 : theme.spacing(3),
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
@@ -55,15 +58,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-
-export const TopAppBar: React.FunctionComponent< unknown > = () => {
-
+export const TopAppBar: React.FunctionComponent<unknown> = () => {
   const classes = useStyles();
   const buttonClasses = useButtonStyles();
   const [isOpen, setOpenClose] = React.useState<boolean>(true);
-  const [eventType, setEventType] = React.useState<string>('Featured') // TODO use featured
-  const [functionSelected, setFunction] = React.useState<string>("corporate-events");
-  
+  const [eventType, setEventType] = React.useState<string>("Featured"); // TODO use featured
+  const [functionSelected, setFunction] = React.useState<string>(
+    "corporate-events"
+  );
+
   const handleFunctionClick = (functionName: string) => {
     setFunction(functionName);
   };
@@ -77,8 +80,8 @@ export const TopAppBar: React.FunctionComponent< unknown > = () => {
         classes={buttonClasses}
         key={functions}
         onClick={() => {
-          
-          handleFunctionClick(functions)}}
+          handleFunctionClick(functions);
+        }}
       >
         {displayFunctionTypes[functions]}
       </Button>
@@ -103,16 +106,23 @@ export const TopAppBar: React.FunctionComponent< unknown > = () => {
         </Toolbar>
       </AppBar>
 
-        <SideBarWithRouter openCloseStatus={isOpen} nameSpace={functionSelected} clickAction={setEventType}/>
+      <SideBarWithRouter
+        openCloseStatus={isOpen}
+        nameSpace={functionSelected}
+        clickAction={setEventType}
+      />
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: isOpen
         })}
       >
         <div className={classes.toolbar} />
-        <MainContentContainer eventType={eventType} isOpen={isOpen} functionSelected={functionSelected}/>
+        <MainContentContainer
+          eventType={eventType}
+          isOpen={isOpen}
+          functionSelected={functionSelected}
+        />
       </main>
     </div>
-  )
-}
-
+  );
+};

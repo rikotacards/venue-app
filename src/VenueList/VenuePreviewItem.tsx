@@ -9,8 +9,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { VenueStatsContainer } from "./VenueItemStats";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch, Route } from "react-router-dom";
 import { Divider } from "@material-ui/core";
+import { VenuePageContainer } from "../VenuePage/VenuePageContainer";
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
@@ -44,10 +45,11 @@ interface VenuePreviewItemProps {
 }
 
 export const VenuePreviewItem: React.FunctionComponent<
-  VenuePreviewItemProps
+  VenuePreviewItemProps 
 > = props => {
   // TODO Button on click action open new tab
   // TODO, use ID
+  let match = useRouteMatch();
   const {
     venueName,
     id,
@@ -59,6 +61,7 @@ export const VenuePreviewItem: React.FunctionComponent<
   } = props;
   const classes = useStyles();
   return (
+    <>
     <Card className={classes.card}>
       <CardActionArea className={classes.cardActionArea}>
         <CardMedia
@@ -84,7 +87,7 @@ export const VenuePreviewItem: React.FunctionComponent<
       </CardActionArea>
 
       <CardActions>
-        <Button component={Link} to="/what">
+        <Button component={Link} to={`${match && match.url}/${venueName}`}>
           Details
         </Button>
 
@@ -92,5 +95,10 @@ export const VenuePreviewItem: React.FunctionComponent<
         </Button>
       </CardActions>
     </Card>
+
+    <Route path={`${match && match.path}/:topicId`}>
+      <VenuePageContainer venueId={venueName} isOpen={false}/>
+    </Route>
+    </>
   );
 };

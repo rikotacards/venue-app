@@ -8,6 +8,7 @@ import { BudgetDetailsContainer } from "./RightSideColumn/BudgetDetailsContainer
 import { OtherDetailsContainer } from "./RightSideColumn/OtherDetailsContainer";
 import { MainContent } from "./MainContent";
 import { isDesktop, isMobile } from "../device";
+import { useRouteMatch } from "react-router";
 
 interface VenuePageContainerProps {
   venueId: number | string;
@@ -51,9 +52,16 @@ const useClasses = makeStyles((theme: Theme) => ({
 export const VenuePageContainer: React.FunctionComponent<
   VenuePageContainerProps
 > = props => {
+  const match = useRouteMatch();
+console.log('v page conatienr', match)
   const { venueId, isOpen } = props;
   const classes = useClasses(isOpen);
   // Grab all venue information
+
+console.log('venuedetails', venueDetailsData[venueId])
+if (!venueDetailsData[venueId]){
+  return (null)
+}
   const {
     phone,
     email,
@@ -62,7 +70,7 @@ export const VenuePageContainer: React.FunctionComponent<
     capacitySitting,
     address,
     venueSize
-  } = venueDetailsData[venueId] && venueDetailsData[venueId];
+  } = venueDetailsData[venueId];
 
   const rightSideColumn = (
     <Box className={classes.rightSideColumn}>

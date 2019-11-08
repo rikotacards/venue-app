@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { venueData } from "../FakeData/venueData";
 import { VenueList } from "../VenueList/VenueList";
 import { Typography, Theme, Box } from "@material-ui/core";
-import { Route, Switch } from "react-router";
-import { VenuePageContainer } from "../VenuePage/VenuePageContainer";
+import { Route, Switch, useRouteMatch } from "react-router";
 import { AxiosResponse } from "axios";
 const axios = require("axios").default;
 
@@ -36,6 +35,7 @@ let MainContentContainer: React.FunctionComponent<
   const [appState, populateAppState] = React.useState<VenueDataType[] | null>(
     null
   );
+  let match = useRouteMatch();
   useEffect(() => {
     console.log('useeffect', functionSelected, eventType)
     axios.get(`/api/venues/${functionSelected}/${eventType}`)
@@ -48,15 +48,13 @@ let MainContentContainer: React.FunctionComponent<
     return <Typography>No venues in this category</Typography>;
   }
   return (
-    <Switch>
-      <Route path="/what">
-        <VenuePageContainer venueId={"hotel_1"} isOpen={isOpen} />
-      </Route>
-
-      <Route path="/">
+    
+    <Route exact path={match && match.path || '/'}>
         <VenueList venueListData={appState} isOpen={isOpen} />
-      </Route>
-    </Switch>
+    </Route>
+
+    
+ 
   );
 };
 

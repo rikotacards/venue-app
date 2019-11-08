@@ -12,12 +12,7 @@ import {
 } from "../DataTypes/functionTypes";
 import { isMobile } from "../device";
 import { withRouter, RouteComponentProps, Switch, Route } from "react-router";
-import { Link } from "react-router-dom";
-import { ButtonBaseProps } from "@material-ui/core/ButtonBase";
-import { VenuePageContainer } from "../VenuePage/VenuePageContainer";
-import { VenueList } from "../VenueList/VenueList";
-import { MainContentContainer } from "../MainContent/MainContentContainer";
-import { ListItemLink } from "./ListItemLink";
+
 import { ButtonLink } from "./ButtonLink";
 
 const useButtonStyles = makeStyles((theme: Theme) => ({
@@ -73,8 +68,11 @@ export const TopAppBar: React.FunctionComponent<unknown> = () => {
   };
   const functionButtons = functionTypes.map(functions => {
     return (
-        <ButtonLink to={`${functions}`} primary={displayFunctionTypes[functions]} className={buttonClasses}/>
-    
+      <ButtonLink
+        to={`${functions}`}
+        primary={displayFunctionTypes[functions]}
+        className={buttonClasses}
+      />
     );
   });
   // TODO convert button to tabs
@@ -95,21 +93,6 @@ export const TopAppBar: React.FunctionComponent<unknown> = () => {
           {functionButtons}
         </Toolbar>
       </AppBar>
-
-      <Switch>
-        <Route path="/corporate-events">
-          <MainContentContainer
-            functionSelected={"corporate-events"}
-            eventType={"Featured"}
-          />
-        </Route>
-        <Route path="/party">
-          <MainContentContainer
-            functionSelected={"Party"}
-            eventType={"Featured"}
-          />
-        </Route>
-      </Switch>
     </div>
   );
 };

@@ -14,6 +14,7 @@ interface ButtonLinkProps {
   primary: string;
   to: string;
   className?: Record<"root", string>;
+  onClick?: () => void;
 }
 
 export const ButtonLink: React.FunctionComponent<ButtonLinkProps> = props => {
@@ -32,5 +33,5 @@ export const ButtonLink: React.FunctionComponent<ButtonLinkProps> = props => {
     [to]
   );
 
-  return <Button component={renderLink} className={className && className.root} >{primary}</Button>;
+  return <Button {...props} component={renderLink} className={className && className.root} >{primary}</Button>;
 };

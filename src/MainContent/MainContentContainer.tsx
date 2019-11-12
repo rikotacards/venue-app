@@ -48,13 +48,16 @@ let MainContentContainer: React.FunctionComponent<
     return <Typography>No venues in this category</Typography>;
   }
   return (
-    
+    <>
     <Route exact path={match && match.path || '/'}>
         <VenueList venueListData={appState} isOpen={isOpen} />
     </Route>
-
     
- 
+
+    <Route exact path={`${match && match.path}/:venue` || '/'}>
+        <VenueList venueListData={appState} isOpen={isOpen} />
+    </Route>
+    </>
   );
 };
 

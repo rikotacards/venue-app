@@ -1,17 +1,14 @@
-import React, { ElementType } from "react";
+import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import Button from "@material-ui/core/Button";
-import clsx from "clsx";
 import {
   functionTypes,
   displayFunctionTypes
 } from "../DataTypes/functionTypes";
 import { isMobile } from "../device";
-import { withRouter, RouteComponentProps, Switch, Route } from "react-router";
 
 import { ButtonLink } from "./ButtonLink";
 
@@ -58,11 +55,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const TopAppBar: React.FunctionComponent<unknown> = () => {
+export const TopAppBar: React.FunctionComponent<unknown> = (props) => {
   const classes = useStyles();
   const buttonClasses = useButtonStyles();
   const [isOpen, setOpenClose] = React.useState<boolean>(true);
-
   const handleClick = () => {
     setOpenClose(!isOpen);
   };
@@ -96,3 +92,4 @@ export const TopAppBar: React.FunctionComponent<unknown> = () => {
     </div>
   );
 };
+

@@ -3,7 +3,7 @@ interface venueDetailsDataType {
 }
 
 export const venueDetailsData: venueDetailsDataType = {
-    'hotel_1': {
+    'Volar': {
         venueName: 'hotel 1', 
         address: 'central, caine Road 46', 
         capacitySitting: '100', 

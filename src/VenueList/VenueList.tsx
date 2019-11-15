@@ -39,9 +39,6 @@ export const VenueList: React.FunctionComponent<VenueListProps> = props => {
         address={venue.venueaddress}
       />
     </Grid>
-      {/* <Route path={`${match && match.path}/:topicId`}>
-      <VenuePageContainer venueId={venue.venuename} isOpen={false}/>
-    </Route> */}
     </>
   ));
   return (

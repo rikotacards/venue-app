@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { venueData } from "../FakeData/venueData";
 import { VenueList } from "../VenueList/VenueList";
-import { Typography, Theme, Box } from "@material-ui/core";
-import { Route, Switch, useRouteMatch } from "react-router";
+import { Typography, Box } from "@material-ui/core";
+import { Route, useRouteMatch } from "react-router";
 import { AxiosResponse } from "axios";
-import { SideBarWithRouter } from "../SideBarNav/SideBar";
+import { SideBarWithRouter, drawerWidth } from "../SideBarNav/SideBar";
 const axios = require("axios").default;
 
 interface MainContentContainerProps {
@@ -46,22 +45,24 @@ let MainContentContainer: React.FunctionComponent<
     });
   }, [functionSelected, eventType]);
   console.log('App state', appState);
+  console.log('sidenav', sideNavOpen)
   if (!appState || !appState.length) {
     return <Typography>No venues in this category</Typography>;
   }
   return (
-    <>
+    
+   <>
     <SideBarWithRouter
       openCloseStatus={sideNavOpen}
       nameSpace={functionSelected || ''}
     />
-  
     
-
     <Route exact path={`${match && match.url}` || '/'}>
-        <VenueList venueListData={appState} isOpen={isOpen} />
+      <Box paddingLeft= {sideNavOpen ? drawerWidth : 0}>
+        <VenueList venueListData={appState} isOpen={sideNavOpen} />
+        </Box>
     </Route>
-    </>
+   </>
   );
 };
 

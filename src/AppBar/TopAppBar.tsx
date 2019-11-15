@@ -11,12 +11,19 @@ import {
 import { isMobile } from "../device";
 
 import { ButtonLink } from "./ButtonLink";
+import { useRouteMatch } from "react-router";
 
 const useButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     color: "white"
   }
 }));
+
+interface TopAppBarProps {
+  toggleSideNav?: () => void; 
+  openCloseSideNav?: () => void; 
+
+}
 
 const drawerWidth = 240;
 
@@ -55,19 +62,19 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const TopAppBar: React.FunctionComponent<unknown> = (props) => {
+export const TopAppBar: React.FunctionComponent<TopAppBarProps> = (props) => {
   const classes = useStyles();
+  const { toggleSideNav, openCloseSideNav } = props;
   const buttonClasses = useButtonStyles();
-  const [isOpen, setOpenClose] = React.useState<boolean>(true);
-  const handleClick = () => {
-    setOpenClose(!isOpen);
-  };
-  const functionButtons = functionTypes.map(functions => {
+  let match = useRouteMatch(); 
+  console.log('match from TopAppBar', match)
+ const functionButtons = functionTypes.map(functions => {
     return (
       <ButtonLink
-        to={`${functions}`}
+        to={`/${functions}`}
         primary={displayFunctionTypes[functions]}
         className={buttonClasses}
+        onClick={toggleSideNav}
       />
     );
   });
@@ -77,7 +84,7 @@ export const TopAppBar: React.FunctionComponent<unknown> = (props) => {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar variant="dense">
           <IconButton
-            onClick={handleClick}
+            onClick={openCloseSideNav}
             aria-label="open drawer"
             edge="start"
             color="inherit"

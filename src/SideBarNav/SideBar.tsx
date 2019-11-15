@@ -18,7 +18,7 @@ interface SideMenuProps {
   clickAction?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const drawerWidth = 240;
+export const drawerWidth = `240px`;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawer: {
       width: drawerWidth,
-      flexShrink: 0
+      flexShrink: 1
     },
     drawerPaper: {
       width: drawerWidth

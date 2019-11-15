@@ -4,12 +4,14 @@ import { VenueList } from "../VenueList/VenueList";
 import { Typography, Theme, Box } from "@material-ui/core";
 import { Route, Switch, useRouteMatch } from "react-router";
 import { AxiosResponse } from "axios";
+import { SideBarWithRouter } from "../SideBarNav/SideBar";
 const axios = require("axios").default;
 
 interface MainContentContainerProps {
   eventType: string;
   functionSelected? : string;
   isOpen?: boolean;
+  sideNavOpen: boolean;
 }
 
 export interface VenueDataType {
@@ -31,7 +33,7 @@ export interface VenueDataType {
 let MainContentContainer: React.FunctionComponent<
   MainContentContainerProps
 > = props => {
-  const { isOpen, eventType, functionSelected } = props; 
+  const { sideNavOpen, isOpen, eventType, functionSelected } = props; 
   const [appState, populateAppState] = React.useState<VenueDataType[] | null>(
     null
   );
@@ -49,12 +51,14 @@ let MainContentContainer: React.FunctionComponent<
   }
   return (
     <>
-    <Route exact path={match && match.path || '/'}>
-        <VenueList venueListData={appState} isOpen={isOpen} />
-    </Route>
+    <SideBarWithRouter
+      openCloseStatus={sideNavOpen}
+      nameSpace={functionSelected || ''}
+    />
+  
     
 
-    <Route exact path={`${match && match.path}/:venue` || '/'}>
+    <Route exact path={`${match && match.url}` || '/'}>
         <VenueList venueListData={appState} isOpen={isOpen} />
     </Route>
     </>

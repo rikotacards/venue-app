@@ -50,6 +50,7 @@ export const VenuePreviewItem: React.FunctionComponent<
   // TODO Button on click action open new tab
   // TODO, use ID
   let match = useRouteMatch();
+  console.log('match from preview', match )
   const {
     venueName,
     id,

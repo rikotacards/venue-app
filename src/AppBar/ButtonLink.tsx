@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Omit } from "@material-ui/types";
 import {
   Link as RouterLink,
@@ -18,8 +17,8 @@ interface ButtonLinkProps {
 }
 
 export const ButtonLink: React.FunctionComponent<ButtonLinkProps> = props => {
-  const { icon, primary, to, className } = props;
-
+  const { primary, to, className } = props;
+  console.log('button link to', to)
   const renderLink = React.useMemo(
     () =>
       React.forwardRef<

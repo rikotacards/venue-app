@@ -12,11 +12,10 @@ const App: React.FC = () => {
   const functionNameClick = () => {
     toggleSideNav(true);
   };
-
   const openCloseSideNav = () => {
     toggleSideNav(!sideNavOpen)
   }
-
+ 
   return (
     <div className="App">
       <BrowserRouter>
@@ -26,7 +25,6 @@ const App: React.FC = () => {
           <Route path="/corporate-events">
             <Box marginTop="40px">
               <MainContentContainer
-                functionSelected={"corporate-events"}
                 eventType={"Featured"}
                 sideNavOpen={sideNavOpen}
               />

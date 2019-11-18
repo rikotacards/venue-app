@@ -7,7 +7,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import {
   functionTypes,
   displayFunctionTypes
-} from "../DataTypes/functionTypes";
+} from "../config/functionTypes";
 import { isMobile } from "../device";
 
 import { ButtonLink } from "./ButtonLink";

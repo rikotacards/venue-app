@@ -32,20 +32,20 @@ export interface VenueDataType {
 let MainContentContainer: React.FunctionComponent<
   MainContentContainerProps
 > = props => {
-  const { sideNavOpen, isOpen, eventType, functionSelected } = props; 
+  const { sideNavOpen, eventType } = props; 
   const [appState, populateAppState] = React.useState<VenueDataType[] | null>(
     null
   );
-  let match = useRouteMatch();
+  let match = useRouteMatch()
+  let functionSelected = match && match.path
+  console.log('match from maincontent container', match)
   useEffect(() => {
-    console.log('useeffect', functionSelected, eventType)
-    axios.get(`/api/venues/${functionSelected}/${eventType}`)
+    axios.get(`/api/venues${functionSelected}/${eventType}`)
     .then((response: AxiosResponse) => {
       populateAppState(response.data);
     });
   }, [functionSelected, eventType]);
   console.log('App state', appState);
-  console.log('sidenav', sideNavOpen)
   if (!appState || !appState.length) {
     return <Typography>No venues in this category</Typography>;
   }
@@ -54,10 +54,10 @@ let MainContentContainer: React.FunctionComponent<
    <>
     <SideBarWithRouter
       openCloseStatus={sideNavOpen}
-      nameSpace={functionSelected || ''}
+      nameSpace={functionSelected && functionSelected.substr(1) || ''}
     />
     
-    <Route exact path={`${match && match.url}` || '/'}>
+    <Route exact path={`${match && match.path}:/eventType` || '/'}>
       <Box paddingLeft= {sideNavOpen ? drawerWidth : 0}>
         <VenueList venueListData={appState} isOpen={sideNavOpen} />
         </Box>

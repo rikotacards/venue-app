@@ -1,7 +1,7 @@
 // Recieves the venue ID from the Main Content Container
 
 import React from "react";
-import { Grid, makeStyles, Theme, Paper, Box } from "@material-ui/core";
+import { makeStyles, Theme, Paper, Box } from "@material-ui/core";
 import { venueDetailsData } from "../FakeData/VenueDetailsData";
 import { ContactContainer } from "./RightSideColumn/ContactContainer";
 import { BudgetDetailsContainer } from "./RightSideColumn/BudgetDetailsContainer";

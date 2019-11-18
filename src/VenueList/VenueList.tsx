@@ -3,8 +3,7 @@ import { VenuePreviewItem } from "./VenuePreviewItem";
 import { Grid, makeStyles, Box } from "@material-ui/core";
 import { isMobile } from "../device";
 import { VenueDataType } from "../MainContent/MainContentContainer";
-import { VenuePageContainer } from "../VenuePage/VenuePageContainer";
-import { useRouteMatch, Route } from "react-router";
+
 
 interface VenueListProps {
   venueListData: VenueDataType[];

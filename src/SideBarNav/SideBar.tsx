@@ -42,7 +42,8 @@ const SideBar: React.FunctionComponent<SideMenuProps & RouteComponentProps>= Rea
   const classes = useStyles();
   let match = useRouteMatch(); 
   const [selected, setSelection] = React.useState<number>(0)
-  const {  nameSpace, openCloseStatus, clickAction, history } = props;
+  const {  nameSpace, openCloseStatus } = props;
+  console.log(eventTypes[nameSpace])
   // These are side menu items
   const itemList = eventTypes[nameSpace] && eventTypes[nameSpace].map((eventType: string, index:number) => {
     const handleClick = (index:number) => {

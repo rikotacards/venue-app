@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 import { VenueList } from "../VenueList/VenueList";
 import { Typography, Box } from "@material-ui/core";
-import { Route, useRouteMatch } from "react-router";
+import { Route, useRouteMatch, RouteComponentProps } from "react-router";
 import { AxiosResponse } from "axios";
 import { SideBarWithRouter, drawerWidth } from "../SideBarNav/SideBar";
+import { VenuePageContainer } from "../VenuePage/VenuePageContainer";
 const axios = require("axios").default;
+export type Params = { eventType?: string; functionType: string };
 
-interface MainContentContainerProps {
+interface MainContentContainerProps extends RouteComponentProps<Params> {
   eventType: string;
-  functionSelected? : string;
+  functionSelected?: string;
   isOpen?: boolean;
   sideNavOpen: boolean;
 }
@@ -29,40 +31,64 @@ export interface VenueDataType {
   category?: string[];
 }
 
-let MainContentContainer: React.FunctionComponent<
-  MainContentContainerProps
-> = props => {
-  const { sideNavOpen, eventType } = props; 
+let MainContentContainer: React.FunctionComponent<MainContentContainerProps> = props => {
+  const { sideNavOpen = true, match } = props;
   const [appState, populateAppState] = React.useState<VenueDataType[] | null>(
     null
   );
-  let match = useRouteMatch()
-  let functionSelected = match && match.path
-  console.log('match from maincontent container', match)
+  console.log("match maincontent container", match);
+  let functionSelected = match.params.functionType;
+  const eventType = match.params.eventType;
+
+  //FLOW1:INITAL DATA GRAB - to do, grab featured first, now grab all.
   useEffect(() => {
-    axios.get(`/api/venues${functionSelected}/${eventType}`)
-    .then((response: AxiosResponse) => {
-      populateAppState(response.data);
-    });
+    if (!eventType) {
+      axios
+        .get(`/api/venues/${functionSelected}`)
+        .then((response: AxiosResponse) => {
+          console.log(`GRAB ALL FROM ${functionSelected}`, response.data);
+          populateAppState(response.data);
+        }, console.log("appstate from FIRST GRAB", appState));
+    } else {
+      axios
+        .get(`/api/venues/${functionSelected}/${eventType}`)
+        .then((response: AxiosResponse) => {
+          console.log("WITH EVENT TYP");
+          console.log(response.data);
+          populateAppState(response.data);
+        }, console.log("appstate", appState));
+    }
   }, [functionSelected, eventType]);
-  console.log('App state', appState);
+
   if (!appState || !appState.length) {
-    return <Typography>No venues in this category</Typography>;
+    return (
+      <Box paddingTop="40px">
+        <Typography color="textPrimary">No venues in this category</Typography>
+      </Box>
+    );
   }
   return (
-    
-   <>
-    <SideBarWithRouter
-      openCloseStatus={sideNavOpen}
-      nameSpace={functionSelected && functionSelected.substr(1) || ''}
-    />
-    
-    <Route exact path={`${match && match.path}:/eventType` || '/'}>
-      <Box paddingLeft= {sideNavOpen ? drawerWidth : 0}>
-        <VenueList venueListData={appState} isOpen={sideNavOpen} />
+    <Box paddingTop="40px">
+      <SideBarWithRouter openCloseStatus={true} nameSpace={functionSelected} />
+      <Route exact path={`${match.path}`}>
+        <Box paddingLeft={sideNavOpen ? drawerWidth : 0}>
+          <VenueList
+            functionSelectedPath={functionSelected}
+            venueListData={appState}
+            isOpen={sideNavOpen}
+          />
         </Box>
-    </Route>
-   </>
+      </Route>
+      <Route path={`${match.path}/:eventType`}>
+        <Box paddingLeft={sideNavOpen ? drawerWidth : 0}>
+          <VenueList
+            functionSelectedPath={functionSelected}
+            venueListData={appState}
+            isOpen={sideNavOpen}
+          />
+        </Box>
+      </Route>
+    </Box>
   );
 };
 

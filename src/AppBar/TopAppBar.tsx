@@ -11,7 +11,7 @@ import {
 import { isMobile } from "../device";
 
 import { ButtonLink } from "./ButtonLink";
-import { useRouteMatch } from "react-router";
+import { useRouteMatch, RouteComponentProps } from "react-router";
 
 const useButtonStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -64,10 +64,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const TopAppBar: React.FunctionComponent<TopAppBarProps> = (props) => {
   const classes = useStyles();
-  const { toggleSideNav, openCloseSideNav } = props;
+  const { toggleSideNav, openCloseSideNav,  } = props;
   const buttonClasses = useButtonStyles();
-  let match = useRouteMatch(); 
-  console.log('match from TopAppBar', match)
  const functionButtons = functionTypes.map(functions => {
     return (
       <ButtonLink

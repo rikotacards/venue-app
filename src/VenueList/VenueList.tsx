@@ -2,12 +2,18 @@ import React from "react";
 import { VenuePreviewItem } from "./VenuePreviewItem";
 import { Grid, makeStyles, Box } from "@material-ui/core";
 import { isMobile } from "../device";
-import { VenueDataType } from "../MainContent/MainContentContainer";
+import { VenueDataType, Params } from "../MainContent/MainContentContainer";
+import {  RouteComponentProps } from "react-router";
+import { AxiosResponse } from "axios";
+import classes from "*.module.css";
+const axios = require("axios").default;
+
 
 
 interface VenueListProps {
   venueListData: VenueDataType[];
   isOpen?: boolean;
+  functionSelectedPath: string | null;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -20,9 +26,34 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
+
 // Receives an array of venues
 // TODO instead of rendering {singleVenue} text, we need to render a component
 export const VenueList: React.FunctionComponent<VenueListProps> = props => {
+  // const [appState, populateAppState] = React.useState<VenueDataType[] | null>(
+  //   null
+  // );
+  // let functionSelected = match.path;
+
+  // React.useEffect(() => {
+  //   if(!eventType){
+  //     axios
+  //     .get(`/api/venues/${functionSelected}`)
+  //     .then((response: AxiosResponse) => {
+  //       console.log(response.data);
+  //       populateAppState(response.data);
+  //     }, console.log("appstate", appState));
+  //   } else {
+  //   axios
+  //     .get(`/api/venues/${functionSelected}/${eventType}`)
+  //     .then((response: AxiosResponse) => {
+  //       console.log('WITH EVENT TYP')
+  //       console.log(response.data);
+  //       populateAppState(response.data);
+  //     }, console.log("appstate", appState));
+    
+  // }}, [functionSelected, eventType]);
   const { venueListData, isOpen } = props;
   const classes = useStyles(isOpen);
   const venueList = venueListData.map(venue => (

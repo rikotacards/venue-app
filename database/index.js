@@ -29,7 +29,7 @@ const getVenuesByFunctionType = async (functionType) => {
 const getVenuesByFunctionEventType = async (functionType, eventType) => {
   try {
     console.log('venue by func and event type')
-    var query = `select * from venuedetails where functiontype ilike '%${functionType}%' and eventType ILIKE '%${eventType}%'`;
+    var query = eventType ? `select * from venuedetails where functiontype ilike '%${functionType}%' and eventType ILIKE '%${eventType}%'` :`select * from venuedetails where functiontype ilike '%${functionType}%'`;
     var output = await pool.query(query);
     console.log( output.rowCount);
     return output.rows;

@@ -18,7 +18,6 @@ interface ButtonLinkProps {
 
 export const ButtonLink: React.FunctionComponent<ButtonLinkProps> = props => {
   const { primary, to, className } = props;
-  console.log('button link to', to)
   const renderLink = React.useMemo(
     () =>
       React.forwardRef<

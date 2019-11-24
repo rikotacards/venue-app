@@ -42,12 +42,29 @@ app.get("/api/retrieveAllVenues", async (req, res) => {
 // GRAB VENUES WITH SPECIFIC FUNCTION TYPE
 app.get("/api/venues/:functionType/:eventType/", async (req, res)=> {
   try{
+    console.log('EVENT TYPE AND FEATURES')
     console.log('params', req.params)
     const { functionType, eventType } = req.params;
 
 
    const output = await pg.getVenuesByFunctionEventType(functionType, eventType)
     res.status(200).json(output);
+  } catch (error) {
+    throw new Error ('no params')
+  }
+})
+
+// GET VENUES BY FUNCTION ONLY
+app.get('/api/venues/:functionType', async (req, res) => {
+  try{
+    console.log('params', req.params)
+    console.log('only by function hit')
+    const { functionType } = req.params;
+
+
+   const output = await pg.getVenuesByFunctionType(functionType)
+    console.log(output)
+   res.status(200).json(output);
   } catch (error) {
     throw new Error ('no params')
   }

@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { Box, Typography, makeStyles, Theme, Divider } from '@material-ui/core';
+import { Box, Typography, makeStyles, Theme } from '@material-ui/core';
 
 interface SidePanelHeaderProps {
     headerText: string;

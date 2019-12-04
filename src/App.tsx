@@ -12,36 +12,31 @@ const App: React.FC = () => {
   const functionNameClick = () => {
     toggleSideNav(true);
   };
-
   const openCloseSideNav = () => {
     toggleSideNav(!sideNavOpen)
   }
-
+ 
   return (
     <div className="App">
       <BrowserRouter>
         <TopAppBar toggleSideNav={functionNameClick} openCloseSideNav={openCloseSideNav}/>
         <br />
         <Switch>
-          <Route path="/corporate-events">
+          
+          {/* <Route  path="/:functionType/:eventType" component={MainContentContainer}/> */}
+          <Route path="/:functionType" component={MainContentContainer} 
+          />
+}/>
+
+
+         
+
+          <Route exact path="/">
             <Box marginTop="40px">
-              <MainContentContainer
-                functionSelected={"corporate-events"}
-                eventType={"Featured"}
-                sideNavOpen={sideNavOpen}
-              />
+              'HOME PAGE'
             </Box>
           </Route>
-          <Route path="/party">
-            <MainContentContainer
-              functionSelected={"Party"}
-              eventType={"Featured"}
-              sideNavOpen={sideNavOpen}
-
-
-
-            />
-          </Route>
+          
         </Switch>
       </BrowserRouter>
     </div>

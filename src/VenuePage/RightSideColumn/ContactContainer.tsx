@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const ContactContainer: React.FunctionComponent<
   ContactContainerProps
 > = props => {
-  const { phone, email } = props;
+  const { phone } = props;
   const classes = useStyles();
   const [showNumber, toggleShowNumber] = React.useState(false);
   const [showEmail, toggleShowEmail] = React.useState(false);

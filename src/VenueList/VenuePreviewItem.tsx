@@ -42,15 +42,17 @@ interface VenuePreviewItemProps {
   capacityStanding?: number;
   address?: string;
   budgetPerHead?: number;
-}
+  index?: number;
+  passUpIndex: (index:number) => void;
+} 
 
 export const VenuePreviewItem: React.FunctionComponent<
   VenuePreviewItemProps 
 > = props => {
   // TODO Button on click action open new tab
   // TODO, use ID
+  const {passUpIndex, index } = props;
   let match = useRouteMatch();
-  console.log('match from preview', match )
   const {
     venueName,
     id,
@@ -88,7 +90,7 @@ export const VenuePreviewItem: React.FunctionComponent<
       </CardActionArea>
 
       <CardActions>
-        <Button component={Link} to={`${match && match.url}/${venueName}`}>
+        <Button component={Link} to={`${match && match.url}/${venueName}`} onClick={() => passUpIndex(index || 0)}>
           Details
         </Button>
 
@@ -97,9 +99,7 @@ export const VenuePreviewItem: React.FunctionComponent<
       </CardActions>
     </Card>
 
-    <Route path={`${match && match.path}/:topicId`}>
-      <VenuePageContainer venueId={venueName} isOpen={false}/>
-    </Route>
+
     </>
   );
 };

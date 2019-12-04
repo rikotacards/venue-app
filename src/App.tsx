@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch, useRouteMatch } from "react-router-dom";
 import { VenuePageContainer } from "./VenuePage/VenuePageContainer";
 import { MainContentContainer } from "./MainContent/MainContentContainer";
 import { Box } from "@material-ui/core";
+import { SideBarWithRouter } from "./SideBarNav/SideBar";
 
 const App: React.FC = () => {
   const [sideNavOpen, toggleSideNav] = React.useState(false);
@@ -23,13 +24,12 @@ const App: React.FC = () => {
         <Switch>
           
           {/* <Route  path="/:functionType/:eventType" component={MainContentContainer}/> */}
-          <Route exact path="/:functionType" component={MainContentContainer}/>
+          <Route path="/:functionType" component={MainContentContainer} 
+          />
+}/>
 
-          <Route exact path="/:functionType/:eventType" component={MainContentContainer}/>
 
-          <Route path="/party">
-
-          </Route>
+         
 
           <Route exact path="/">
             <Box marginTop="40px">

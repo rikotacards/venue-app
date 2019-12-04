@@ -9,13 +9,13 @@ import List from "@material-ui/core/List";
 import ListItemText from "@material-ui/core/ListItemText";
 import { eventTypes } from "../config/eventTypes";
 import { MenuItem } from "@material-ui/core"
-import { withRouter, RouteComponentProps, useRouteMatch } from "react-router";
+import { withRouter, RouteComponentProps, useRouteMatch, useParams } from "react-router";
 import { ListItemLink } from "../AppBar/ListItemLink";
 import { makeUrlFriendly } from "../utils/makeUrlFriendly";
+import { Params } from "../MainContent/MainContentContainer";
 
-interface SideMenuProps {
+interface SideMenuProps  extends RouteComponentProps<Params> {
   openCloseStatus: boolean;
-  nameSpace: string;
   clickAction?: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -23,10 +23,8 @@ export const drawerWidth = `240px`;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      display: 'flex'
-    },
     drawer: {
+      display:'flex',
       width: drawerWidth,
       flexShrink: 1
     },
@@ -38,22 +36,22 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-const SideBar: React.FunctionComponent<SideMenuProps & RouteComponentProps>= React.memo((props) => {
+const SideBar: React.FunctionComponent<SideMenuProps >= React.memo((props) => {
   const classes = useStyles();
-  let match = useRouteMatch(); 
+  const nameSpace = props.match.params.functionType
+  console.log('side bar parapsm', props)
   const [selected, setSelection] = React.useState<number>(0)
-  const {  nameSpace, openCloseStatus } = props;
-  console.log(eventTypes[nameSpace])
+  const { openCloseStatus } = props;
+
   // These are side menu items
   const itemList = eventTypes[nameSpace] && eventTypes[nameSpace].map((eventType: string, index:number) => {
     const handleClick = (index:number) => {
         setSelection(index);
-
        
     }
     return (
       <MenuItem button onClick={() =>handleClick(index)} key={eventType} selected={selected === index} >
-        <ListItemLink primary={eventType} key={eventType} to={match && (eventType === 'Featured'? `${match.url}`: `${match.url}/${makeUrlFriendly(eventType)}`) || ''}/>
+        <ListItemLink primary={eventType} key={eventType} to={ `${props.match.url}/${makeUrlFriendly(eventType)}` || ''}/>
       </MenuItem>
     );
   });

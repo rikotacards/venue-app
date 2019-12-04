@@ -52,10 +52,21 @@ const getVenuesByFunctionEventTypeFeature = async (functionType, eventType, feat
   } throw new Error ('ERROR')
 }
 
+const getVenueByVenueName = async (venuename) => {
+ try {
+   console.log('get venue by name')
+   var query = `select * from venuedetails where venueName = '${venuename}'`
+    var output = pool.query(query);
+    return output.rows;
+  } catch {
+    (error)
+  } throw new Error ('no event')
+}
 
 
 module.exports = {
   getAllItems,
   getVenuesByFunctionType,
   getVenuesByFunctionEventType,
+  getVenueByVenueName
 };

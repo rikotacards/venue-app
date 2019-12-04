@@ -54,6 +54,20 @@ app.get("/api/venues/:functionType/:eventType/", async (req, res)=> {
   }
 })
 
+app.get("/api/venueName/:venuename", async (req, res)=> {
+  try{
+    console.log('venuename')
+    console.log('params', req.params)
+    const { venuename } = req.params;
+
+
+   const output = await pg.getVenueByVenueName(venuename)
+    res.status(200).json(output);
+  } catch (error) {
+    throw new Error ('no params')
+  }
+})
+
 // GET VENUES BY FUNCTION ONLY
 app.get('/api/venues/:functionType', async (req, res) => {
   try{

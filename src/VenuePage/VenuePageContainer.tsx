@@ -8,11 +8,17 @@ import { BudgetDetailsContainer } from "./RightSideColumn/BudgetDetailsContainer
 import { OtherDetailsContainer } from "./RightSideColumn/OtherDetailsContainer";
 import { MainContent } from "./MainContent";
 import { isDesktop, isMobile } from "../device";
-import { useRouteMatch } from "react-router";
+import { useRouteMatch, useParams } from "react-router";
+import { drawerWidth } from "../SideBarNav/SideBar";
+import { VenueDataType } from "../MainContent/MainContentContainer";
+import { AxiosResponse } from "axios";
+
+const axios = require("axios").default;
 
 interface VenuePageContainerProps {
   venueId: number | string;
   isOpen?: boolean;
+
 }
 
 const useClasses = makeStyles((theme: Theme) => ({
@@ -27,11 +33,8 @@ const useClasses = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     flexBasis: isMobile() ? "100%" : "70%",
     marginRight: isMobile() ? 0 : theme.spacing(2),
-    maxWidth: "550px"
-  },
-  overlay: {
-    background: (isOpen: boolean) =>
-      isMobile() ? (isOpen ? "grey" : "transparent") : "transparent"
+    maxWidth: "550px",
+    marginLeft: (isOpen: boolean) => isOpen ? drawerWidth: 0
   },
   wrapper: {
     display: "flex",
@@ -52,13 +55,24 @@ const useClasses = makeStyles((theme: Theme) => ({
 export const VenuePageContainer: React.FunctionComponent<
   VenuePageContainerProps
 > = props => {
-  const match = useRouteMatch();
-console.log('v page conatienr', match)
+  const [appState, populateAppState] = React.useState<VenueDataType| null>(
+    null
+  );
   const { venueId, isOpen } = props;
   const classes = useClasses(isOpen);
+  const {eventType, functionSelectedPath, venueName} = useParams();
+  console.log('vnuepage containter', useParams())
   // Grab all venue information
+console.log(useParams())
+  React.useEffect(() => {
+    axios
+      .get(`/api/venueName/${venueName}`)
+      .then((response: AxiosResponse) => {
+        populateAppState(response.data);
+      }, console.log('OWN VENUE', appState));
+    
+  }, [functionSelectedPath, eventType]);
 
-console.log('venuedetails', venueDetailsData[venueId])
 if (!venueDetailsData[venueId]){
   return (null)
 }
@@ -92,13 +106,11 @@ if (!venueDetailsData[venueId]){
   );
 
   return (
-    <Box className={classes.overlay}>
       <Box className={classes.wrapper}>
         <Paper className={classes.mainContent} elevation={0}>
           <MainContent />
         </Paper>
         {rightSideColumn}
       </Box>
-    </Box>
   );
 };

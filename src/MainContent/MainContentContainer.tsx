@@ -1,11 +1,18 @@
 import React, { useEffect } from "react";
 import { VenueList } from "../VenueList/VenueList";
 import { Typography, Box } from "@material-ui/core";
-import { Route, useRouteMatch, RouteComponentProps } from "react-router";
-import { AxiosResponse } from "axios";
+import {
+  Route,
+  RouteComponentProps,
+  Switch,
+  Redirect,
+  useParams,
+  useHistory,
+} from "react-router";
 import { SideBarWithRouter, drawerWidth } from "../SideBarNav/SideBar";
 import { VenuePageContainer } from "../VenuePage/VenuePageContainer";
 const axios = require("axios").default;
+
 export type Params = { eventType?: string; functionType: string };
 
 interface MainContentContainerProps extends RouteComponentProps<Params> {
@@ -33,61 +40,47 @@ export interface VenueDataType {
 
 let MainContentContainer: React.FunctionComponent<MainContentContainerProps> = props => {
   const { sideNavOpen = true, match } = props;
+  const [venueIndex, setIndex ] = React.useState<number>(0);
   const [appState, populateAppState] = React.useState<VenueDataType[] | null>(
     null
   );
-  console.log("match maincontent container", match);
   let functionSelected = match.params.functionType;
   const eventType = match.params.eventType;
 
-  //FLOW1:INITAL DATA GRAB - to do, grab featured first, now grab all.
-  useEffect(() => {
-    if (!eventType) {
-      axios
-        .get(`/api/venues/${functionSelected}`)
-        .then((response: AxiosResponse) => {
-          console.log(`GRAB ALL FROM ${functionSelected}`, response.data);
-          populateAppState(response.data);
-        }, console.log("appstate from FIRST GRAB", appState));
-    } else {
-      axios
-        .get(`/api/venues/${functionSelected}/${eventType}`)
-        .then((response: AxiosResponse) => {
-          console.log("WITH EVENT TYP");
-          console.log(response.data);
-          populateAppState(response.data);
-        }, console.log("appstate", appState));
-    }
-  }, [functionSelected, eventType]);
+ const grabState = (data: VenueDataType[]) => {
+    populateAppState(data);
+ }
 
-  if (!appState || !appState.length) {
-    return (
-      <Box paddingTop="40px">
-        <Typography color="textPrimary">No venues in this category</Typography>
-      </Box>
-    );
-  }
+ const passUpIndex = (venueIndex: number)=> {
+   setIndex(venueIndex)
+ }
+
+console.log('main content params', useParams())
+console.log('from main',appState)
+console.log('match', match)
+console.log('appatate', appState && appState[venueIndex])
+ 
   return (
     <Box paddingTop="40px">
-      <SideBarWithRouter openCloseStatus={true} nameSpace={functionSelected} />
-      <Route exact path={`${match.path}`}>
-        <Box paddingLeft={sideNavOpen ? drawerWidth : 0}>
-          <VenueList
-            functionSelectedPath={functionSelected}
-            venueListData={appState}
-            isOpen={sideNavOpen}
-          />
-        </Box>
-      </Route>
-      <Route path={`${match.path}/:eventType`}>
-        <Box paddingLeft={sideNavOpen ? drawerWidth : 0}>
-          <VenueList
-            functionSelectedPath={functionSelected}
-            venueListData={appState}
-            isOpen={sideNavOpen}
-          />
-        </Box>
-      </Route>
+      <SideBarWithRouter openCloseStatus={true} />
+      <Switch>
+        <Route exact path={`${match.url}`}>
+          <Redirect to={`${match.url}/featured`} />
+        </Route>
+        <Route exact path={`${match.url}/:eventType`}>
+          <Box paddingLeft={sideNavOpen ? drawerWidth : 0}>
+            <VenueList
+              functionSelectedPath={functionSelected}
+              isOpen={sideNavOpen}
+              grabState={grabState}
+              passUpIndex={passUpIndex}
+            />
+          </Box>
+        </Route>
+        <Route exact path={`${match.url}/:eventType/:venueName`}>
+          <VenuePageContainer venueId={appState && appState[venueIndex].venuename || ''} isOpen={true} />
+        </Route>
+      </Switch>
     </Box>
   );
 };

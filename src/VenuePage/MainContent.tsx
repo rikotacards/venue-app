@@ -8,7 +8,7 @@ import {
   makeStyles,
   Box
 } from "@material-ui/core";
-import { AmenitiesContainer } from "./AmenitiesContainer";
+import { AmenitiesContainer } from "./AmenitiesContainer/AmenitiesContainer";
 import { VenueOverviewContent } from "./VenueOverviewContent";
 import { VenueIntro } from "./VenueIntro";
 import { VenueGallery, imageList } from "./VenueGallery";
@@ -50,7 +50,7 @@ export const MainContent: React.FunctionComponent = () => {
       <Box className={classes.tabsInfo}>
         {value === 0 && <VenueOverviewContent />}
         {value === 0 && <VenueIntro />}
-        {value === 1 && <AmenitiesContainer />}
+        {value === 1 && <AmenitiesContainer enableColumnLayout={true}/>}
       </Box>
     </>
   );

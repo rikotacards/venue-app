@@ -16,10 +16,10 @@ export const VenueOverviewContent: React.FunctionComponent = () => {
         </Typography>
         <Box className={overviewClasses.root}>
             <ul>
-                <li> Only gather 2 friends or more to enjoy a whole private room</li>
-                <li>Specially designed party room for small gatherings and parties</li>
-                <li>Contains 4 differently designed private party rooms for hire</li>
-                <li> Conveinant Causeway Bay location</li>
+                <li> <Typography variant='caption'>Only gather 2 friends or more to enjoy a whole private room</Typography></li>
+                <li><Typography variant='caption'>Specially designed party room for small gatherings and parties</Typography></li>
+                <li><Typography variant='caption'>Contains 4 differently designed private party rooms for hire</Typography></li>
+                <li> <Typography variant='caption'>Conveinant Causeway Bay location</Typography></li>
             </ul>
       </Box>
       </Box>

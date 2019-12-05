@@ -8,7 +8,7 @@ import { BudgetDetailsContainer } from "./RightSideColumn/BudgetDetailsContainer
 import { OtherDetailsContainer } from "./RightSideColumn/OtherDetailsContainer";
 import { MainContent } from "./MainContent";
 import { isDesktop, isMobile } from "../device";
-import { useRouteMatch, useParams } from "react-router";
+import { useParams } from "react-router";
 import { drawerWidth } from "../SideBarNav/SideBar";
 import { VenueDataType } from "../MainContent/MainContentContainer";
 import { AxiosResponse } from "axios";

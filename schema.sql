@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS venuedetails (
     email varchar (50), 
     capacityStanding integer,
     capacitySitting integer, 
-    venueSize varchar (20), --"1000 square feet"
+    venueSize varchar ( 20 ), --"1000 square feet"
     venueType varchar (20), --"Bar"
     eventType varchar (100), -- "Annual dinner"
     functionType varchar(100), -- "Corporate"

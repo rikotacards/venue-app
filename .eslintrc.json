@@ -31,6 +31,8 @@
 		"plugin:import/typescript",
 		"prettier"
 	],
+	"ignorePatterns": ["temp.js", "node_modules/", "schema.sql"],
+	
 	"rules": {
 		"react/jsx-curly-spacing": ["warn", "never"],
 		"react/jsx-equals-spacing": ["warn", "never"],

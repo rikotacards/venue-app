@@ -10,13 +10,12 @@ import {
 } from "@material-ui/core";
 import { AmenitiesContainer } from "./AmenitiesContainer/AmenitiesContainer";
 import { VenueOverviewContent } from "./VenueOverviewContent";
-import { VenueIntro } from "./VenueIntro";
 import { VenueGallery, imageList } from "./VenueGallery";
 import { isMobile } from "../device";
 
 const useStyles = makeStyles((theme: Theme) => ({
   mainBody: {
-    border: 0
+    border: 0,
   },
   venueName: {
     textAlign: "left",
@@ -24,7 +23,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: theme.spacing(0, 1)
   },
   tabsInfo: {
-    margin: isMobile() ? theme.spacing(2) : 0
+    margin: isMobile() ? theme.spacing(2) : 0,
+    textAlign: 'left'
   }
 }));
 
@@ -49,7 +49,6 @@ export const MainContent: React.FunctionComponent = () => {
       </Paper>
       <Box className={classes.tabsInfo}>
         {value === 0 && <VenueOverviewContent />}
-        {value === 0 && <VenueIntro />}
         {value === 1 && <AmenitiesContainer enableColumnLayout={true}/>}
       </Box>
     </>

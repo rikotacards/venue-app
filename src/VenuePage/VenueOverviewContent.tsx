@@ -1,5 +1,6 @@
 import React from 'react'; 
 import { Box, Typography, makeStyles, Theme } from '@material-ui/core'
+import { VenueIntro } from './VenueIntro';
 
 const useOverviewStyles = makeStyles((theme: Theme) => ({
     root: {
@@ -21,6 +22,7 @@ export const VenueOverviewContent: React.FunctionComponent = () => {
                 <li><Typography variant='caption'>Contains 4 differently designed private party rooms for hire</Typography></li>
                 <li> <Typography variant='caption'>Conveinant Causeway Bay location</Typography></li>
             </ul>
+            <VenueIntro />
       </Box>
       </Box>
     );

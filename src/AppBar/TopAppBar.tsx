@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+
 export const TopAppBar: React.FunctionComponent<TopAppBarProps> = (props) => {
   const classes = useStyles();
   const { toggleSideNav, openCloseSideNav,  } = props;

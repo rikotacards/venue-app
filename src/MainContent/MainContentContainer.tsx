@@ -58,6 +58,7 @@ let MainContentContainer: React.FunctionComponent<MainContentContainerProps & Ro
    setIndex(venueIndex)
  }
 
+ console.log('appstate', appState)
  
   return (
     <>
@@ -79,7 +80,11 @@ let MainContentContainer: React.FunctionComponent<MainContentContainerProps & Ro
           </Box>
         </Route>
         <Route exact path={`${match.url}/:eventType/:venueName`}>
+        <Box paddingLeft={isSideNavOpen ? drawerWidth : 0}>
+
           <VenuePageContainer venueId={appState && appState[venueIndex].venuename || ''} isOpen={true} />
+          </Box>
+
         </Route>
       </Switch>
     </Box>

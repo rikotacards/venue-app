@@ -7,12 +7,13 @@ import { Box } from "@material-ui/core";
 import { isDesktop } from "./device/platform";
 
 const App: React.FC = () => {
-  const [isSideNavOpen, toggleSideNav] = React.useState(false);
+  const [isOpen, toggleSideNav] = React.useState(false);
+  const isSideNavOpen = isDesktop() ? true : isOpen
   const functionNameClick = () => {
     toggleSideNav(true);
   };
   const openCloseSideNav = () => {
-    toggleSideNav(!isSideNavOpen);
+    toggleSideNav(!isOpen);
   };
 
   return (
@@ -26,7 +27,7 @@ const App: React.FC = () => {
         <Switch>
           <Route path="/:functionType"
           >
-            <MainContentContainerWithRouter isSideNavOpen={ isDesktop() ? true : isSideNavOpen} openCloseSideNav={openCloseSideNav}/>
+            <MainContentContainerWithRouter isSideNavOpen={ isSideNavOpen} openCloseSideNav={openCloseSideNav}/>
             </Route>
           
           <Route exact path="/">

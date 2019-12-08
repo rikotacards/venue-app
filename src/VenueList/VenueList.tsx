@@ -19,11 +19,8 @@ interface VenueListProps {
 const useStyles = makeStyles(theme => ({
   overlay: {
     background: (isOpen: boolean) =>
-      isMobile() ? (isOpen ? "grey" : "transparent") : "transparent"
+      isMobile() ? (isOpen ? "transparent" : "transparent") : "transparent"
   },
-  venueListContainer: {
-    opacity: (isOpen: boolean) => (isMobile() ? (isOpen ? 0.3 : 1) : 1)
-  }
 }));
 
 
@@ -70,7 +67,7 @@ export const VenueList: React.FunctionComponent<VenueListProps> = props => {
     <>
     {!appState && noVenue}
     <Box className={classes.overlay}>
-      <Grid container className={classes.venueListContainer}>
+      <Grid container>
         {venueList}
       </Grid>
     </Box>

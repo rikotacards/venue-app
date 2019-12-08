@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { VenueList } from "../VenueList/VenueList";
-import { Typography, Box } from "@material-ui/core";
+import {  Box, makeStyles, Theme } from "@material-ui/core";
 import {
   Route,
   RouteComponentProps,
   Switch,
   Redirect,
-  useParams,
-  useHistory,
+  withRouter,
 } from "react-router";
 import { SideBarWithRouter, drawerWidth } from "../SideBarNav/SideBar";
 import { VenuePageContainer } from "../VenuePage/VenuePageContainer";
@@ -15,11 +14,9 @@ const axios = require("axios").default;
 
 export type Params = { eventType?: string; functionType: string };
 
-interface MainContentContainerProps extends RouteComponentProps<Params> {
-  eventType: string;
-  functionSelected?: string;
-  isOpen?: boolean;
-  sideNavOpen: boolean;
+interface MainContentContainerProps  {
+  isSideNavOpen: boolean;
+  openCloseSideNav: () => void;
 }
 
 export interface VenueDataType {
@@ -38,14 +35,20 @@ export interface VenueDataType {
   category?: string[];
 }
 
-let MainContentContainer: React.FunctionComponent<MainContentContainerProps> = props => {
-  const { sideNavOpen = true, match } = props;
+
+
+const useStyles = makeStyles((theme: Theme) => ({
+  offset: theme.mixins.toolbar
+}))
+
+let MainContentContainer: React.FunctionComponent<MainContentContainerProps & RouteComponentProps<Params>> = props => {
+  const { isSideNavOpen = true, match, openCloseSideNav } = props;
+  const classes = useStyles();
   const [venueIndex, setIndex ] = React.useState<number>(0);
   const [appState, populateAppState] = React.useState<VenueDataType[] | null>(
     null
   );
   let functionSelected = match.params.functionType;
-  const eventType = match.params.eventType;
 
  const grabState = (data: VenueDataType[]) => {
     populateAppState(data);
@@ -55,23 +58,21 @@ let MainContentContainer: React.FunctionComponent<MainContentContainerProps> = p
    setIndex(venueIndex)
  }
 
-console.log('main content params', useParams())
-console.log('from main',appState)
-console.log('match', match)
-console.log('appatate', appState && appState[venueIndex])
  
   return (
-    <Box paddingTop="40px">
-      <SideBarWithRouter openCloseStatus={true} />
+    <>
+    <div className={classes.offset}/>
+    <Box>
+      <SideBarWithRouter isSideNavOpen={isSideNavOpen} openCloseSideNav={openCloseSideNav}/>
       <Switch>
         <Route exact path={`${match.url}`}>
           <Redirect to={`${match.url}/featured`} />
         </Route>
         <Route exact path={`${match.url}/:eventType`}>
-          <Box paddingLeft={sideNavOpen ? drawerWidth : 0}>
+          <Box paddingLeft={isSideNavOpen ? drawerWidth : 0}>
             <VenueList
               functionSelectedPath={functionSelected}
-              isOpen={sideNavOpen}
+              isOpen={isSideNavOpen}
               grabState={grabState}
               passUpIndex={passUpIndex}
             />
@@ -82,9 +83,10 @@ console.log('appatate', appState && appState[venueIndex])
         </Route>
       </Switch>
     </Box>
+    </>
   );
 };
 
-MainContentContainer = React.memo(MainContentContainer);
+// MainContentContainer = React.memo(MainContentContainer);
 
-export { MainContentContainer };
+export const MainContentContainerWithRouter = withRouter(MainContentContainer);

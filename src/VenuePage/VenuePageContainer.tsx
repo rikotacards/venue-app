@@ -34,15 +34,12 @@ const useClasses = makeStyles((theme: Theme) => ({
     flexBasis: isMobile() ? "100%" : "70%",
     marginRight: isMobile() ? 0 : theme.spacing(2),
     maxWidth: "550px",
-    marginLeft: (isOpen: boolean) => isOpen ? drawerWidth: 0
   },
   wrapper: {
     display: "flex",
     flexDirection: "row",
     padding: isDesktop() ? "0px 10%" : 0,
     flexWrap: isMobile() ? 'wrap': 'nowrap',
-    opacity: (isOpen: boolean) =>
-    isMobile() ? (isOpen ? 0.3 : 1) :undefined
   },
   rightSideColumn: {
     display: "flex",
